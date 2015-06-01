@@ -1,6 +1,9 @@
 ## Monolith
 Monlith is a framework to build iOS tweaks. This repository holds the Monolith framework as well as source code for example tweaks.
 
+## Beta Status
+### Please note that Monolith is currently in beta. There's debug logging that you'll see when you hook things, and the API may change.
+
 ## Features
 * **XCode Integration:** Projects are built straight from XCode. No modification of XCode's internal files are required, everything is native.
 * **Simple:** Monolith takes the complication out of building tweaks.
