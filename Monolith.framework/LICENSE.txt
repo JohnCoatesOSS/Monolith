@@ -1,0 +1,6 @@
+Monolith framework license agreement.
+
+John Coates grants you a license to use the Monolith framework, and redistribute it for any lawful purpose.
+
+Royalty
+You agree to pay John Coates a royalty equal to 15% of all worldwide gross revenue attributable to a product that incorporates usage of the Monolith framework.
