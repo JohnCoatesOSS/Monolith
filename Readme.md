@@ -25,6 +25,7 @@ Prerequisites:
 * Building Monolith tweaks requires XCode 6.
 * Architectures supported are ARM-64, ARM, and x86-64
 * Please note that building for the iOS Simulator requires that you build for the 5s simulator or later, as 32-bit x86 builds aren't supported
+* The Monolith framework must be installed on your device. Either download [monolith.deb](http://getdelta.co/debs/monolith_0.01.deb) or install with Cydia by adding [getdelta.co](http://getdelta.co) to your sources and installing Monolith Beta through that.
 
 I recommend building **Templates/ObjectiveC Tweak** first. Here are the steps:
 
