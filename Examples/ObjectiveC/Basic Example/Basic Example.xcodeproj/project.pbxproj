@@ -7,9 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8EE040A51B1C772D00C0DC69 /* Monolith.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EE040A41B1C772D00C0DC69 /* Monolith.framework */; };
-		8EE040A61B1C773400C0DC69 /* Monolith.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EE040A41B1C772D00C0DC69 /* Monolith.framework */; };
-		8EE040A71B1C773400C0DC69 /* Monolith.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8EE040A41B1C772D00C0DC69 /* Monolith.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8EE844851AF0351100521E38 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EE844841AF0351100521E38 /* main.m */; };
 		8EE844881AF0351100521E38 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EE844871AF0351100521E38 /* AppDelegate.m */; };
 		8EE8448B1AF0351100521E38 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EE8448A1AF0351100521E38 /* ViewController.m */; };
@@ -18,6 +15,8 @@
 		8EE844931AF0351100521E38 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EE844911AF0351100521E38 /* LaunchScreen.xib */; };
 		8EE8449F1AF0351100521E38 /* Basic_ExampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EE8449E1AF0351100521E38 /* Basic_ExampleTests.m */; };
 		8EE844AD1AF035A000521E38 /* MBEView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EE844AC1AF035A000521E38 /* MBEView.m */; };
+		FAD725D51B1D0BBF0032E880 /* Monolith.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAD725D31B1D0B760032E880 /* Monolith.framework */; };
+		FAD725D61B1D0BC00032E880 /* Monolith.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FAD725D31B1D0B760032E880 /* Monolith.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,7 +36,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				8EE040A71B1C773400C0DC69 /* Monolith.framework in Embed Frameworks */,
+				FAD725D61B1D0BC00032E880 /* Monolith.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -45,7 +44,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		8EE040A41B1C772D00C0DC69 /* Monolith.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Monolith.framework; path = "../../../../../../Library/Developer/Xcode/DerivedData/Monolith-acfhdhjuguufalgqxqkwpmljdubd/Build/Products/Release-iphoneos/Monolith.framework"; sourceTree = "<group>"; };
 		8EE8447F1AF0351100521E38 /* Basic Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Basic Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8EE844831AF0351100521E38 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8EE844841AF0351100521E38 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -61,6 +59,7 @@
 		8EE8449E1AF0351100521E38 /* Basic_ExampleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Basic_ExampleTests.m; sourceTree = "<group>"; };
 		8EE844AB1AF035A000521E38 /* MBEView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBEView.h; sourceTree = "<group>"; };
 		8EE844AC1AF035A000521E38 /* MBEView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBEView.m; sourceTree = "<group>"; };
+		FAD725D31B1D0B760032E880 /* Monolith.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Monolith.framework; path = ../../../Monolith.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,8 +67,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8EE040A61B1C773400C0DC69 /* Monolith.framework in Frameworks */,
-				8EE040A51B1C772D00C0DC69 /* Monolith.framework in Frameworks */,
+				FAD725D51B1D0BBF0032E880 /* Monolith.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -86,7 +84,7 @@
 		8EE844761AF0351100521E38 = {
 			isa = PBXGroup;
 			children = (
-				8EE040A41B1C772D00C0DC69 /* Monolith.framework */,
+				FAD725D31B1D0B760032E880 /* Monolith.framework */,
 				8EE844811AF0351100521E38 /* Basic Example */,
 				8EE8449B1AF0351100521E38 /* Basic ExampleTests */,
 				8EE844801AF0351100521E38 /* Products */,
@@ -316,7 +314,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGNING_REQUIRED = NO;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -360,7 +358,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGNING_REQUIRED = NO;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -386,9 +384,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				FRAMEWORK_SEARCH_PATHS = (
+					../../../,
 					"$(inherited)",
-					/Users/macpro/Dev/Projects/Monolith,
-					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/Monolith-acfhdhjuguufalgqxqkwpmljdubd/Build/Products/Release-iphoneos",
+					/Users/macbook/Dev/Projects/Monolith,
 				);
 				INFOPLIST_FILE = "Basic Example/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -402,9 +400,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				FRAMEWORK_SEARCH_PATHS = (
+					../../../,
 					"$(inherited)",
-					/Users/macpro/Dev/Projects/Monolith,
-					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/Monolith-acfhdhjuguufalgqxqkwpmljdubd/Build/Products/Release-iphoneos",
+					/Users/macbook/Dev/Projects/Monolith,
 				);
 				INFOPLIST_FILE = "Basic Example/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
