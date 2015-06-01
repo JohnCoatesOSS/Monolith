@@ -1,4 +1,11 @@
 #!/usr/bin/ruby
+
+# configure with your device's IP
+# make sure you can SSH in without a password
+# use this tutorial: http://www.priyaontech.com/2012/01/ssh-into-your-jailbroken-idevice-without-a-password/
+deviceIP = "192.168.1.161"
+
+
 require 'fileutils'
 
 # check for dpkg-deb
@@ -36,8 +43,6 @@ if which("dpkg-deb") == nil
     puts "cannot continue with build"
   end
 end
-
-deviceIP = "192.168.1.161"
 
 Dir.chdir(File.dirname(__FILE__)) do
   # build project
