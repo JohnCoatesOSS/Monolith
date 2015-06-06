@@ -14,7 +14,11 @@ FOUNDATION_EXPORT double MonolithVersionNumber;
 //! Project version string for Monolith.
 FOUNDATION_EXPORT const unsigned char MonolithVersionString[];
 
-// In this header, you should import all the public headers of your framework using statements like #import <Monolith/PublicHeader.h>
-#import <Monolith/MNOHook.h>
-#import <Monolith/MNOHookedCall.h>
+#import <Monolith/MONHook.h>
 #import <Monolith/MONCallHandler.h>
+#import <Monolith/MONProcess.h>
+#import <Monolith/MONPlugin.h>
+
+
+// deprecated
+#import <Monolith/MNOHook.h>

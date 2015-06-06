@@ -1,6 +1,0 @@
-framework module Monolith {
-  umbrella header "Monolith.h"
-
-  export *
-  module * { export * }
-}

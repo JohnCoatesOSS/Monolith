@@ -10,13 +10,6 @@
 
 @interface MONCallHandler : NSObject
 
-@property (readonly) id instance;
-@property (readonly) SEL selector;
-@property MNOHook *hook;
-
-- (instancetype)initWithInstance:(id)instance selector:(SEL)selector stackPointer:(void *)stackPointer;
-- (instancetype)initWithClass:(Class)echelon selector:(SEL)selector stackPointer:(void *)stackPointer;
-
 /// Calls original method and returns an NSObject encapsulating the return value
 - (id)callOriginalMethod;
 
@@ -25,6 +18,8 @@
 
 @interface MONCallHandler (Setters)
 
+/// Sets and argument before a call to -callOriginalMethod
+/// Pass an NSObject encapsulating the original format.
 - (BOOL)setArgument:(NSUInteger)argumentIndex toValue:(id)object;
 
 @end
