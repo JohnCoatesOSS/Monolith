@@ -46,7 +46,11 @@ end
 
 if which("dpkg-deb") == nil
   puts "dpkg not detected, install? y/n"
-  response = gets.chomp
+  
+  # work-around fix for gets = nil error
+  response = gets
+  response ||= ''
+  response.chomp!
   
   if response[0] == "y"
     if which("brew") == nil
