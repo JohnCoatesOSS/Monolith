@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import <Monolith/Monolith.h>
 
-@interface MBEView : MNOHook
+@interface MBEView : MONHook
 
 @end
