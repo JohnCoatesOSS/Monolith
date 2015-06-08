@@ -3,8 +3,8 @@
 # configure with your device's IP
 # make sure you can SSH in without a password
 # use this tutorial: http://www.priyaontech.com/2012/01/ssh-into-your-jailbroken-idevice-without-a-password/
-deviceIP = "192.168.1.161"
-tweakName = "Monolith Example"
+deviceIP = "192.168.1.153"
+configuration = "Release"
 
 require 'fileutils'
 
@@ -70,13 +70,61 @@ if which("dpkg-deb") == nil
   end
 end
 
+require 'open3'
+
+def syscall(*cmd)
+  begin
+    stdout, stderr, status = Open3.capture3(*cmd)
+    status.success? && stdout.slice!(0..-(1 + $/.size)) # strip trailing eol
+  rescue
+  end
+end
+
 Dir.chdir(File.dirname(__FILE__)) do
-  # build project
+
   target = "Tweak"
-  system "xcodebuild", "-target", target, "-configuration", "Release", "build", "CONFIGURATION_BUILD_DIR=release/product", "OBJROOT=release/build"
+ xcodeRawBuildSettings = syscall "xcodebuild", "-target", target, "-configuration", configuration, "build", "CONFIGURATION_BUILD_DIR=release/product", "OBJROOT=release/build", "-showBuildSettings"
+
+  # get xcode variables
+  # taken from https://gist.github.com/Cocoanetics/6765089
+  xcodeBuildSettings = Hash.new
+  # pattern for each line
+  LINE_PATTERN = Regexp.new(/^\s*(.*?)\s=\s(.*)$/)
+  # extract the variables 
+  xcodeRawBuildSettings.each_line do |line|
+    match = LINE_PATTERN.match(line)        
+    #store found variable in hash      
+    if (match)
+      xcodeBuildSettings[match[1]] = match[2]
+    end
+  end
+
+  
+  executablePath = xcodeBuildSettings['EXECUTABLE_PATH']
+  tweakVersion = xcodeBuildSettings['CURRENT_PROJECT_VERSION']
+  tweakName = xcodeBuildSettings['PRODUCT_NAME']
+    
+  if !executablePath
+    puts "error: Couldn't read EXECUTABLE_PATH variable"
+    exit
+  end
+  
+  if !tweakVersion
+    puts "error: Couldn't read CURRENT_PROJECT_VERSION variable"
+    exit
+  end
+  
+  if !tweakName
+    puts "error: Couldn't read PRODUCT_NAME variable"
+    exit
+  end
+  
+  
+  # build project
+  system "xcodebuild", "-target", target, "-configuration", configuration, "build", "CONFIGURATION_BUILD_DIR=release/product", "OBJROOT=release/build"
   
   Dir.chdir("./release") do  
-  # clear folder
+    # clear folder
     if File.exists?('./_') == true
       FileUtils.rm_r("./_")
     end
@@ -86,16 +134,16 @@ Dir.chdir(File.dirname(__FILE__)) do
     # make tweak name filesystem safe
     tweakNameFilesystem = sanitizeFilename(tweakName)
     
-    FileUtils.copy_file(src="./product/Tweak.framework/Tweak", dst="./_/Library/Monolith/Plugins/#{tweakNameFilesystem}.dylib")
+    FileUtils.copy_file(src="./product/#{executablePath}", dst="./_/Library/Monolith/Plugins/#{tweakNameFilesystem}.dylib")
     
-    # copy over control file
+    # copy over control file, anything else in DEBIAN folder
     FileUtils.mkdir_p("./_/DEBIAN/")
-    FileUtils.copy_file(src="../DEBIAN/control", dst="./_/DEBIAN/control")
+    FileUtils.cp_r(src="../DEBIAN", dst="./_/")
     
     # remove .DS_Store files
     system "find ./_/ -name '*.DS_Store' -type f -delete"
     
-    filename = "#{tweakNameFilesystem}.deb"
+    filename = "#{tweakNameFilesystem}_#{tweakVersion}.deb"
     system "dpkg-deb", "-b", "-Zgzip", "_", filename
     
     # transfer deb
