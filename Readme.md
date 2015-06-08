@@ -8,6 +8,12 @@ Monlith is a framework to build iOS tweaks. This repository holds the Monolith f
 * **Xcode Integration:** Projects are built straight from Xcode. No modification of Xcode's internal files are required, everything is native.
 * **Simple:** Monolith takes the complication out of building tweaks.
 
+## Built With Monolith - Open Source
+
+* [Safari Inline Videos](//github.com/johncoates/SafariInlineVideos) Plays videos within the page, instead of going to full screen.
+* [No Tab Labels](//github.com/johncoates/NoTabLabels) Removes tab labels from tab bars.
+
+
 ## Documentation
 
 Documentation is being worked on, please check back soon. Watch this project on Github for update notifications.
@@ -16,7 +22,6 @@ Documentation is being worked on, please check back soon. Watch this project on 
 
 - **Find a bug?** [Open an issue](https://github.com/johncoates/Monolith/issues/new). Try to be as specific as possible.
 - **Have a feature request** [Open an issue](https://github.com/johncoates/Monolith/issues/new). Tell me why this feature would be useful, and why you and others would want it.
-
 
 ## Building Tweaks
 
@@ -35,6 +40,14 @@ I recommend building **Templates/ObjectiveC Tweak** first. Here are the steps:
 * Open an instance of Terminal, drag **build.rb** in and hit enter to make sure it's working.
 * From now on, you can use the **Install Tweak** target to build and install your tweak on your device.
 
+## Other Things to Check Out
+
+* [Xcode Template by @iMokhles](//github.com/iMokhles/Monolith-Xcode-Template)
+
 ## License
 
-Monolith's license is found at [Monolith.framework/LICENSE.txt](https://github.com/johncoates/Monolith/blob/master/Monolith.framework/LICENSE.txt). Basically you can use Monolith for free as long as your product is free. If you're selling a tweak, then 15% of your sales go to John Coates to fund the development of Monolith.
+Monolith's license is found at [Monolith.framework/LICENSE.txt](//github.com/johncoates/Monolith/blob/master/Monolith.framework/LICENSE.txt). Basically you can use Monolith for free as long as your product is free. If you're selling a tweak, then 15% of your sales go to John Coates to fund the development of Monolith.
+
+## Changelog
+
+###
