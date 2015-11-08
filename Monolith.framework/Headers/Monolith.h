@@ -6,7 +6,11 @@
 //  Copyright (c) 2014 John Coates. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import <TargetConditionals.h>
+
+#if TARGET_OS_IOS
+    #import <UIKit/UIKit.h>
+#endif
 
 //! Project version number for Monolith.
 FOUNDATION_EXPORT double MonolithVersionNumber;
@@ -19,6 +23,8 @@ FOUNDATION_EXPORT const unsigned char MonolithVersionString[];
 #import <Monolith/MONProcess.h>
 #import <Monolith/MONPlugin.h>
 
+// Daemon
+#import <Monolith/MONTalkDaemon.h>
 
 // deprecated
 #import <Monolith/MNOHook.h>

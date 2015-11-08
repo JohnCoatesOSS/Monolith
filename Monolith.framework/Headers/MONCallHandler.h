@@ -8,9 +8,20 @@
 
 #import <Foundation/Foundation.h>
 
+// Constants
+
+extern NSUInteger MONRegisterSize; // Size of regular register (32-bit: 4 bytes, 64-bit: 8 bytes)
+extern NSUInteger MONVFPRegisterSize; // Size of VFP registers (8 bytes)
+extern NSUInteger MONOriginalStackStride; // How many bytes seperate the original stack from the end of our pushed registers
+
+extern NSUInteger MONRegisterArguments; // how many method arguments can be stored in registers
+extern NSUInteger MONVFPRegisterArguments; // how many VFP arguments can be stored in registers
+extern NSUInteger MONStoredGeneralRegisters; // how many registers are stored in the stack
+extern NSUInteger MONStoredVFPRegisters; // how many VFP registers are in the stack
+
 @interface MONCallHandler : NSObject
 
-/// Calls original method and returns an NSObject encapsulating the return value
+/// Calls original method and returns an NSObject encapsulating the return value, or the original return value if it was an object
 - (id)callOriginalMethod;
 
 @end

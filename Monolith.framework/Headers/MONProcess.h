@@ -8,14 +8,19 @@
 
 #import <Foundation/Foundation.h>
 
-@interface MONProcess : NSObject
+@interface MONProcess : NSObject <NSCoding>
 
 @property (readonly) NSString *bundleIdentifier;
 @property (readonly) NSString *executablePath;
+@property (readonly, nonatomic) BOOL isBlacklisted;
 
 + (instancetype)currentProcess;
 
 - (BOOL)isSpringBoard;
 - (BOOL)isSimulator;
+
+/// Whether this process is the Monolith daemon
+/// This is where all daemon components should get loaded.
+- (BOOL)isMonolithDaemon;
 
 @end

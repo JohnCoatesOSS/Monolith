@@ -8,6 +8,6 @@
 
 #import <Monolith/Monolith.h>
 
-__attribute((unavailable("use MONHook instead of MNOHook"))) @interface MNOHook : MONHook
+__attribute((unavailable("Use MONHook instead of MNOHook."))) @interface MNOHook : NSObject
 
 @end

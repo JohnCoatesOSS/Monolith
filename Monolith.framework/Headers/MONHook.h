@@ -9,14 +9,11 @@
 #import <Foundation/Foundation.h>
 
 /**
- MONHook is an abstract class used for hooking other classes. Because it is an abstract
- class, you do not use this class directly but instead subclass it to perform the actual hooking.
- Even though it is an abstract class, the default implementation of MONHook includes a signficiant
- amount of logic to safely process your hooks.
+ MONHook is protocol used for hooking other classes.
 
-### Subclassing Notes
+### Implementation Notes
  
-You must subclass + (NSString *)targetClass;
+You must implement + (NSArray <NSString *> *)targetClasses;
 
 ## How To Hook a Class
  
@@ -29,8 +26,8 @@ If your target method is:
 Your hook would look like this:
 
 @code
-- (BOOL)shouldPlayInline_hook:(MONCallHandler *)call {
-	NSNumber *originalReturnValue = [call callOriginalMethod];
+- (BOOL)shouldPlayInline_hook:(MONCallHandler *)callHandler {
+	NSNumber *originalReturnValue = [callHandler callOriginalMethod];
 	NSLog(@"[%@ %@] originally returned: %@, replacing return value with TRUE",
 		NSStringFromClass([self class]),
 		NSStringFromSelector(_cmd),
@@ -41,32 +38,47 @@ Your hook would look like this:
 }
 @endcode
  
+If the method you're hooking takes arguments, simply postfix this to the method: hook:(MONCallHandler *)callHandler
+ 
 */
-@interface MONHook : NSObject
 
-/** @name Required Subclassing */
+@protocol MONHook <NSObject>
+@required
+
+/** @name targetClasses */
 
 /**
- *  This method must be subclassesd.
+ *  This method must be implemented.
  *
- *  @warning `targetClass` must not return `nil`.
- *  @return The class name you're attempting to override.
+ *  @warning `targetClasses` must not return `nil`.
+ *  @return The class or classes that you're setting hooks for.
  */
-+ (NSString *)targetClass;
-
+#ifdef __IPHONE_9_0
++ (NSArray <NSString *> *)targetClasses;
+#else
++ (NSArray *)targetClasses;
+#endif
+@optional
 
 /**
 	Whether hooks should be automatically installed.
-
+ 
 	This is the preferred way to handle hooks. A manual hooking method will be added in the future.
 	@return Whether this class should automatically install hooks on load. Defaults to YES
  */
 + (BOOL)shouldAutomaticallyInstallHooks;
 
-/**
-	When this method is subclasses it will be called to notify a class
-	that its hooks have been installed.
-*/
 
-+ (void)installedHooks;
+/**
+	When this method is implemented, it will be called to notify a class
+	that its hooks have been installed.
+ */
+
++ (void)installedHooksForClass:(NSString *)targetClass;
+
+@end
+
+
+// Subclassing MONHook is deprecated
+__attribute((unavailable("Use MONHook as a protocol instead of subclassing."))) @interface MONHook : NSObject
 @end
