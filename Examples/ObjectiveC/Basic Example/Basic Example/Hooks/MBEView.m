@@ -10,12 +10,13 @@
 
 @implementation MBEView
 
-+ (NSString *)targetClass {
-    return @"UIView";
++ (NSArray *)targetClasses {
+    return @[@"UIView"];
 }
 
-- (UIColor *)backgroundColor_hook:(MONCallHandler *)callHandler {
-    return [UIColor greenColor];
+- (void)setBackgroundColor:(UIColor *)color hook:(MONCallHandler *)callHandler {
+    [callHandler setArgument:2 toValue:[UIColor greenColor]];
+    [callHandler callOriginalMethod];
 }
 
 @end

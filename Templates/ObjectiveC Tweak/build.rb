@@ -3,7 +3,7 @@
 # configure with your device's IP
 # make sure you can SSH in without a password
 # use this tutorial: http://www.priyaontech.com/2012/01/ssh-into-your-jailbroken-idevice-without-a-password/
-deviceIP = "192.168.1.153"
+deviceIP = "192.168.1.163"
 configuration = "Release"
 
 require 'fileutils'
@@ -46,18 +46,18 @@ end
 
 if which("dpkg-deb") == nil
   puts "dpkg not detected, install? y/n"
-  
+
   # work-around fix for gets = nil error
   response = gets
   response ||= ''
   response.chomp!
-  
+
   if response[0] == "y"
     if which("brew") == nil
       puts "installing prerequisite: homebrew package manager"
       system "ruby -e \"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)\""
     end
-    
+
     puts "installing dpkg with homebrew"
     system "brew install dpkg"
 
@@ -90,70 +90,77 @@ Dir.chdir(File.dirname(__FILE__)) do
   xcodeBuildSettings = Hash.new
   # pattern for each line
   LINE_PATTERN = Regexp.new(/^\s*(.*?)\s=\s(.*)$/)
-  # extract the variables 
+  # extract the variables
   xcodeRawBuildSettings.each_line do |line|
-    match = LINE_PATTERN.match(line)        
-    #store found variable in hash      
+    match = LINE_PATTERN.match(line)
+    #store found variable in hash
     if (match)
       xcodeBuildSettings[match[1]] = match[2]
     end
   end
 
-  
+
   executablePath = xcodeBuildSettings['EXECUTABLE_PATH']
   tweakVersion = xcodeBuildSettings['CURRENT_PROJECT_VERSION']
   tweakName = xcodeBuildSettings['PRODUCT_NAME']
-    
+
   if !executablePath
     puts "error: Couldn't read EXECUTABLE_PATH variable"
     exit
   end
-  
+
   if !tweakVersion
     puts "error: Couldn't read CURRENT_PROJECT_VERSION variable"
     exit
   end
-  
+
   if !tweakName
     puts "error: Couldn't read PRODUCT_NAME variable"
     exit
   end
-  
-  
+
+
   # build project
   system "xcodebuild", "-target", target, "-configuration", configuration, "build", "CONFIGURATION_BUILD_DIR=release/product", "OBJROOT=release/build"
-  
-  Dir.chdir("./release") do  
+
+  Dir.chdir("./release") do
     # clear folder
     if File.exists?('./_') == true
       FileUtils.rm_r("./_")
     end
-  
+
     FileUtils.mkdir_p("./_/Library/Monolith/Plugins/")
-    
+
     # make tweak name filesystem safe
     tweakNameFilesystem = sanitizeFilename(tweakName)
-    
+
+    # code sign or crash SpringBoard on iOS 9
+    system "codesign -s - --entitlements ../Resources/Entitlements.plist -f \"./product/#{executablePath}\""
+    exitstatus = $?.exitstatus
+    if exitstatus != 0
+      puts "Codesign failed! Stopping build";
+      exit;
+    end
     FileUtils.copy_file(src="./product/#{executablePath}", dst="./_/Library/Monolith/Plugins/#{tweakNameFilesystem}.dylib")
-    
+
     # copy over control file, anything else in DEBIAN folder
     FileUtils.mkdir_p("./_/DEBIAN/")
     FileUtils.cp_r(src="../DEBIAN", dst="./_/")
-    
+
     # remove .DS_Store files
     system "find ./_/ -name '*.DS_Store' -type f -delete"
-    
+
     filename = "#{tweakNameFilesystem}_#{tweakVersion}.deb"
     system "dpkg-deb", "-b", "-Zgzip", "_", filename
-    
+
     # transfer deb
     system "scp -P 22 #{filename} root@#{deviceIP}:#{filename}"
-    
+
     # install deb
     system "ssh -p 22 root@#{deviceIP} \"dpkg -i #{filename}\""
-    
+
     # kill the app we're testing
-#    system "ssh -p 22 root@#{deviceIP} \"killall MobileStore\""
-    
+    system "ssh -p 22 root@#{deviceIP} \"killall SpringBoard\""
+
     end
 end

@@ -10,8 +10,8 @@
 
 @implementation TWEView
 
-+ (NSString *)targetClass {
-    return @"UIView";
++ (NSArray *)targetClasses {
+    return @[@"UIView"];
 }
 
 

@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>BuildMachineOSBuild</key>
-	<string>15B42</string>
+	<string>15C50</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleExecutable</key>
@@ -17,7 +17,7 @@
 	<key>CFBundlePackageType</key>
 	<string>FMWK</string>
 	<key>CFBundleShortVersionString</key>
-	<string>0.04</string>
+	<string>0.05</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleSupportedPlatforms</key>
@@ -25,23 +25,23 @@
 		<string>iPhoneOS</string>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>0.04</string>
+	<string>0.05</string>
 	<key>DTCompiler</key>
 	<string>com.apple.compilers.llvm.clang.1_0</string>
 	<key>DTPlatformBuild</key>
-	<string>13B137</string>
+	<string>13C75</string>
 	<key>DTPlatformName</key>
 	<string>iphoneos</string>
 	<key>DTPlatformVersion</key>
-	<string>9.1</string>
+	<string>9.2</string>
 	<key>DTSDKBuild</key>
-	<string>13B137</string>
+	<string>13C75</string>
 	<key>DTSDKName</key>
-	<string>iphoneos9.1</string>
+	<string>iphoneos9.2</string>
 	<key>DTXcode</key>
-	<string>0710</string>
+	<string>0720</string>
 	<key>DTXcodeBuild</key>
-	<string>7B91b</string>
+	<string>7C68</string>
 	<key>MinimumOSVersion</key>
 	<string>8.0</string>
 	<key>UIDeviceFamily</key>
