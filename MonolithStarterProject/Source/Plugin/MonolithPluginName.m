@@ -10,6 +10,10 @@
 
 @implementation MonolithPluginName
 
++ (void)load {
+    NSLog(@"Monolith Plugin: %@ running!", [self name]);
+}
+
 + (NSString *)name {
 	return @"Monolith Plugin Example";
 }
@@ -18,4 +22,5 @@
 	return YES; // Load into every process
 	
 }
+
 @end
