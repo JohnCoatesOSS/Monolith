@@ -6,12 +6,12 @@
 //  Copyright (c) 2015 John Coates. All rights reserved.
 //
 
-#import "OBJCPluginExample.h"
+#import "MonolithPluginName.h"
 
-@implementation OBJCPluginExample
+@implementation MonolithPluginName
 
 + (NSString *)name {
-	return @"Objective-C Plugin Example";
+	return @"Monolith Plugin Example";
 }
 
 + (BOOL)shouldLoadIntoProcess:(MONProcess *)process {

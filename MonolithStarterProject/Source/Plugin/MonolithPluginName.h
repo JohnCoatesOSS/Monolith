@@ -14,6 +14,6 @@
 	You must change this class name before you release your tweak,
 	or it will conflict.
 */
-@interface OBJCPluginExample : MONPlugin
+@interface MonolithPluginName : MONPlugin
 
 @end

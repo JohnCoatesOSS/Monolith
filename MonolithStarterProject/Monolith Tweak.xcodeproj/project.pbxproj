@@ -7,22 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8E315F611B263A0B00FB761E /* OBJCPluginExample.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E315F5F1B263A0B00FB761E /* OBJCPluginExample.h */; };
-		8E315F621B263A0B00FB761E /* OBJCPluginExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E315F601B263A0B00FB761E /* OBJCPluginExample.m */; };
+		8E315F611B263A0B00FB761E /* MonolithPluginName.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E315F5F1B263A0B00FB761E /* MonolithPluginName.h */; };
+		8E315F621B263A0B00FB761E /* MonolithPluginName.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E315F601B263A0B00FB761E /* MonolithPluginName.m */; };
 		8E63FD601AF0394C00B2E569 /* TWEView.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E63FD5E1AF0394C00B2E569 /* TWEView.h */; };
 		8E63FD611AF0394C00B2E569 /* TWEView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E63FD5F1AF0394C00B2E569 /* TWEView.m */; };
 		FA59B6901C6C3DE30041420C /* Monolith.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA59B68F1C6C3DE30041420C /* Monolith.framework */; };
+		FA59B6931C6C3F2D0041420C /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FA59B6921C6C3F2D0041420C /* Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		8E315F5F1B263A0B00FB761E /* OBJCPluginExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBJCPluginExample.h; sourceTree = "<group>"; };
-		8E315F601B263A0B00FB761E /* OBJCPluginExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OBJCPluginExample.m; sourceTree = "<group>"; };
-		8E315F641B263A6300FB761E /* TweakPrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TweakPrefixHeader.pch; sourceTree = "<group>"; };
+		8E315F5F1B263A0B00FB761E /* MonolithPluginName.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MonolithPluginName.h; sourceTree = "<group>"; };
+		8E315F601B263A0B00FB761E /* MonolithPluginName.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MonolithPluginName.m; sourceTree = "<group>"; };
+		8E315F641B263A6300FB761E /* Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Prefix.pch; sourceTree = "<group>"; };
 		8E63FD3F1AF038A500B2E569 /* Monolith Tweak.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "Monolith Tweak.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		8E63FD431AF038A500B2E569 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8E63FD5E1AF0394C00B2E569 /* TWEView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWEView.h; sourceTree = "<group>"; };
 		8E63FD5F1AF0394C00B2E569 /* TWEView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWEView.m; sourceTree = "<group>"; };
 		FA59B68F1C6C3DE30041420C /* Monolith.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Monolith.framework; sourceTree = "<group>"; };
+		FA59B6921C6C3F2D0041420C /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,8 +41,8 @@
 		8E315F631B263A0F00FB761E /* Plugin */ = {
 			isa = PBXGroup;
 			children = (
-				8E315F5F1B263A0B00FB761E /* OBJCPluginExample.h */,
-				8E315F601B263A0B00FB761E /* OBJCPluginExample.m */,
+				8E315F5F1B263A0B00FB761E /* MonolithPluginName.h */,
+				8E315F601B263A0B00FB761E /* MonolithPluginName.m */,
 			);
 			path = Plugin;
 			sourceTree = "<group>";
@@ -57,7 +58,8 @@
 		8E63FD351AF038A500B2E569 = {
 			isa = PBXGroup;
 			children = (
-				8E63FD411AF038A500B2E569 /* Monolith Tweak */,
+				8E63FD411AF038A500B2E569 /* Source */,
+				FA59B6911C6C3F190041420C /* Supporting Files */,
 				8E315F651B263B2C00FB761E /* Frameworks */,
 				8E63FD401AF038A500B2E569 /* Products */,
 			);
@@ -71,24 +73,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		8E63FD411AF038A500B2E569 /* Monolith Tweak */ = {
+		8E63FD411AF038A500B2E569 /* Source */ = {
 			isa = PBXGroup;
 			children = (
 				8E315F631B263A0F00FB761E /* Plugin */,
 				8E63FD5D1AF0392B00B2E569 /* Hooks */,
-				8E315F641B263A6300FB761E /* TweakPrefixHeader.pch */,
-				8E63FD421AF038A500B2E569 /* Supporting Files */,
+				8E315F641B263A6300FB761E /* Prefix.pch */,
 			);
-			name = "Monolith Tweak";
-			path = "ObjectiveC Tweak";
-			sourceTree = "<group>";
-		};
-		8E63FD421AF038A500B2E569 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				8E63FD431AF038A500B2E569 /* Info.plist */,
-			);
-			name = "Supporting Files";
+			path = Source;
 			sourceTree = "<group>";
 		};
 		8E63FD5D1AF0392B00B2E569 /* Hooks */ = {
@@ -100,6 +92,14 @@
 			path = Hooks;
 			sourceTree = "<group>";
 		};
+		FA59B6911C6C3F190041420C /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				FA59B6921C6C3F2D0041420C /* Info.plist */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -108,7 +108,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8E63FD601AF0394C00B2E569 /* TWEView.h in Headers */,
-				8E315F611B263A0B00FB761E /* OBJCPluginExample.h in Headers */,
+				8E315F611B263A0B00FB761E /* MonolithPluginName.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -190,6 +190,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA59B6931C6C3F2D0041420C /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -201,7 +202,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8E63FD611AF0394C00B2E569 /* TWEView.m in Sources */,
-				8E315F621B263A0B00FB761E /* OBJCPluginExample.m in Sources */,
+				8E315F621B263A0B00FB761E /* MonolithPluginName.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -309,8 +310,8 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
-				GCC_PREFIX_HEADER = "ObjectiveC Tweak/TweakPrefixHeader.pch";
-				INFOPLIST_FILE = "ObjectiveC Tweak/Info.plist";
+				GCC_PREFIX_HEADER = Source/Prefix.pch;
+				INFOPLIST_FILE = "Supporting Files/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "Monolith Tweak";
@@ -333,8 +334,8 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
-				GCC_PREFIX_HEADER = "ObjectiveC Tweak/TweakPrefixHeader.pch";
-				INFOPLIST_FILE = "ObjectiveC Tweak/Info.plist";
+				GCC_PREFIX_HEADER = Source/Prefix.pch;
+				INFOPLIST_FILE = "Supporting Files/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "Monolith Tweak";
