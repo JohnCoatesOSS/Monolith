@@ -92,7 +92,7 @@ Dir.chdir(configuration.buildFolder) do
 	# sign with entitlements
 	entilementsPath = "#{projectDirectory}/Resources/Entitlements.plist"
 	if signBinary(deviceBinary, entilementsPath) == false
-		puts "failed to sign binary @ #{frameworkPath}"
+		puts "failed to sign binary @ #{deviceBinary}"
 		exit 1;
 	end
 
