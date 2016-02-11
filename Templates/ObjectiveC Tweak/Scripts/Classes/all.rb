@@ -5,14 +5,11 @@ require 'open3'
 
 $classesDirectory = File.expand_path(File.dirname(__FILE__))
 $scriptsDirectory = File.expand_path($classesDirectory + "/../")
-$projectDirectory = File.expand_path($scriptsDirectory + "/../")
-$buildDirectory = File.expand_path($projectDirectory + "/Release")
+projectDirectory = File.expand_path($scriptsDirectory + "/../")
 
 require "#{$classesDirectory}/Xcode"
 require "#{$classesDirectory}/Packaging"
 require "#{$classesDirectory}/Configuration"
-
-
 
 def syscall(*cmd)
 	begin
@@ -26,7 +23,7 @@ end
 
 def signBinary(binaryPath, entitlementsPath = nil)
 	puts "Signing binary @ #{binaryPath} with #{entitlementsPath}"
-	
+
 	system "codesign -s - --entitlements \"#{entitlementsPath}\" -f \"#{binaryPath}\""
 	exitstatus = $?.exitstatus
 	if exitstatus != 0
@@ -114,32 +111,3 @@ def ensureDPKGInstalled()
 		end
 	end
 end
-
-def ensureiOSLibInstalled()
-	if which("dpkg-deb") == nil
-		puts "dpkg not detected, install? y/n"
-
-		# work-around fix for gets = nil error
-		response = gets
-		response ||= ''
-		response.chomp!
-
-		if response[0] == "y"
-			if which("brew") == nil
-				puts "installing prerequisite: homebrew package manager"
-				system "ruby -e \"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)\""
-			end
-
-			puts "installing dpkg with homebrew"
-			system "brew install dpkg"
-
-		elsif response[0] == "n"
-			puts "install refused: cannot continue with build"
-			exit;
-		else
-			puts "Expected y or n, received: "+response
-			puts "cannot continue with build"
-		end
-	end
-end
-
