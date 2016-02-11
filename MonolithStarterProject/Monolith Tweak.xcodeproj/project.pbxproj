@@ -13,7 +13,21 @@
 		8E63FD611AF0394C00B2E569 /* TWEView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E63FD5F1AF0394C00B2E569 /* TWEView.m */; };
 		FA59B6901C6C3DE30041420C /* Monolith.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA59B68F1C6C3DE30041420C /* Monolith.framework */; };
 		FA59B6931C6C3F2D0041420C /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FA59B6921C6C3F2D0041420C /* Info.plist */; };
+		FA59B6961C6C42490041420C /* Monolith Tweak.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8E63FD3F1AF038A500B2E569 /* Monolith Tweak.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		FA59B6941C6C41ED0041420C /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "~/Library/Monolith/Plugins";
+			dstSubfolderSpec = 0;
+			files = (
+				FA59B6961C6C42490041420C /* Monolith Tweak.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		8E315F5F1B263A0B00FB761E /* MonolithPluginName.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MonolithPluginName.h; sourceTree = "<group>"; };
@@ -140,6 +154,7 @@
 				8E63FD3B1AF038A500B2E569 /* Frameworks */,
 				8E63FD3C1AF038A500B2E569 /* Headers */,
 				8E63FD3D1AF038A500B2E569 /* Resources */,
+				FA59B6941C6C41ED0041420C /* CopyFiles */,
 			);
 			buildRules = (
 			);
