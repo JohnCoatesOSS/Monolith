@@ -17,7 +17,7 @@
                BlueprintIdentifier = "8E63FD3E1AF038A500B2E569"
                BuildableName = "Monolith Example.framework"
                BlueprintName = "Tweak"
-               ReferencedContainer = "container:ObjectiveC Tweak.xcodeproj">
+               ReferencedContainer = "container:Monolith Tweak.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -31,7 +31,7 @@
                BlueprintIdentifier = "8E63FD491AF038A500B2E569"
                BuildableName = "ObjectiveC TweakTests.xctest"
                BlueprintName = "ObjectiveC TweakTests"
-               ReferencedContainer = "container:ObjectiveC Tweak.xcodeproj">
+               ReferencedContainer = "container:Monolith Tweak.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -49,7 +49,7 @@
                BlueprintIdentifier = "8E63FD491AF038A500B2E569"
                BuildableName = "ObjectiveC TweakTests.xctest"
                BlueprintName = "ObjectiveC TweakTests"
-               ReferencedContainer = "container:ObjectiveC Tweak.xcodeproj">
+               ReferencedContainer = "container:Monolith Tweak.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -59,7 +59,7 @@
             BlueprintIdentifier = "8E63FD3E1AF038A500B2E569"
             BuildableName = "Monolith Example.framework"
             BlueprintName = "Tweak"
-            ReferencedContainer = "container:ObjectiveC Tweak.xcodeproj">
+            ReferencedContainer = "container:Monolith Tweak.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -81,7 +81,7 @@
             BlueprintIdentifier = "8E63FD3E1AF038A500B2E569"
             BuildableName = "Monolith Example.framework"
             BlueprintName = "Tweak"
-            ReferencedContainer = "container:ObjectiveC Tweak.xcodeproj">
+            ReferencedContainer = "container:Monolith Tweak.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -99,7 +99,7 @@
             BlueprintIdentifier = "8E63FD3E1AF038A500B2E569"
             BuildableName = "Monolith Example.framework"
             BlueprintName = "Tweak"
-            ReferencedContainer = "container:ObjectiveC Tweak.xcodeproj">
+            ReferencedContainer = "container:Monolith Tweak.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>
