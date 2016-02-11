@@ -117,7 +117,7 @@
 /* Begin PBXLegacyTarget section */
 		FAD725CF1B1D08230032E880 /* Install Tweak */ = {
 			isa = PBXLegacyTarget;
-			buildArgumentsString = ./build.rb;
+			buildArgumentsString = "$(PROJECT_DIR)/Scripts/build.tweak.rb";
 			buildConfigurationList = FAD725D01B1D08230032E880 /* Build configuration list for PBXLegacyTarget "Install Tweak" */;
 			buildPhases = (
 			);
