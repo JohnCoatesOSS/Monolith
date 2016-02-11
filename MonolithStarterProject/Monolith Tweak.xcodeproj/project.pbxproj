@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		8E315F611B263A0B00FB761E /* OBJCPluginExample.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E315F5F1B263A0B00FB761E /* OBJCPluginExample.h */; };
 		8E315F621B263A0B00FB761E /* OBJCPluginExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E315F601B263A0B00FB761E /* OBJCPluginExample.m */; };
-		8E63FD451AF038A500B2E569 /* Tweak.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E63FD441AF038A500B2E569 /* Tweak.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8E63FD601AF0394C00B2E569 /* TWEView.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E63FD5E1AF0394C00B2E569 /* TWEView.h */; };
 		8E63FD611AF0394C00B2E569 /* TWEView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E63FD5F1AF0394C00B2E569 /* TWEView.m */; };
 		FA59B6901C6C3DE30041420C /* Monolith.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA59B68F1C6C3DE30041420C /* Monolith.framework */; };
@@ -21,7 +20,6 @@
 		8E315F641B263A6300FB761E /* TweakPrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TweakPrefixHeader.pch; sourceTree = "<group>"; };
 		8E63FD3F1AF038A500B2E569 /* Monolith Tweak.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "Monolith Tweak.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E63FD431AF038A500B2E569 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8E63FD441AF038A500B2E569 /* Tweak.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Tweak.h; sourceTree = "<group>"; };
 		8E63FD5E1AF0394C00B2E569 /* TWEView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWEView.h; sourceTree = "<group>"; };
 		8E63FD5F1AF0394C00B2E569 /* TWEView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWEView.m; sourceTree = "<group>"; };
 		FA59B68F1C6C3DE30041420C /* Monolith.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Monolith.framework; sourceTree = "<group>"; };
@@ -78,7 +76,6 @@
 			children = (
 				8E315F631B263A0F00FB761E /* Plugin */,
 				8E63FD5D1AF0392B00B2E569 /* Hooks */,
-				8E63FD441AF038A500B2E569 /* Tweak.h */,
 				8E315F641B263A6300FB761E /* TweakPrefixHeader.pch */,
 				8E63FD421AF038A500B2E569 /* Supporting Files */,
 			);
@@ -112,7 +109,6 @@
 			files = (
 				8E63FD601AF0394C00B2E569 /* TWEView.h in Headers */,
 				8E315F611B263A0B00FB761E /* OBJCPluginExample.h in Headers */,
-				8E63FD451AF038A500B2E569 /* Tweak.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
