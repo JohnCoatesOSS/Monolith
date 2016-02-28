@@ -1,5 +1,4 @@
 //
-//  OBJCPluginExample.m
 //  ObjectiveC Tweak
 //
 //  Created by John Coates on 6/8/15.

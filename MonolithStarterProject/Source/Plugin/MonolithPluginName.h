@@ -1,5 +1,4 @@
 //
-//  OBJCPluginExample.h
 //  ObjectiveC Tweak
 //
 //  Created by John Coates on 6/8/15.
@@ -12,7 +11,7 @@
 /* 
 	This is an example name.
 	You must change this class name before you release your tweak,
-	or it will conflict.
+	or it will conflict with other tweaks.
 */
 @interface MonolithPluginName : MONPlugin
 
