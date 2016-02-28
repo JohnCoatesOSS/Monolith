@@ -13,7 +13,42 @@
 		8E63FD611AF0394C00B2E569 /* TWEView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E63FD5F1AF0394C00B2E569 /* TWEView.m */; };
 		FA59B6901C6C3DE30041420C /* Monolith.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA59B68F1C6C3DE30041420C /* Monolith.framework */; };
 		FA59B6931C6C3F2D0041420C /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FA59B6921C6C3F2D0041420C /* Info.plist */; };
+		FA6F102B1C6E5C76002FB5E8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FA6F102A1C6E5C76002FB5E8 /* main.m */; };
+		FA6F102E1C6E5C76002FB5E8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FA6F102D1C6E5C76002FB5E8 /* AppDelegate.m */; };
+		FA6F10311C6E5C76002FB5E8 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA6F10301C6E5C76002FB5E8 /* ViewController.m */; };
+		FA6F10341C6E5C76002FB5E8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA6F10321C6E5C76002FB5E8 /* Main.storyboard */; };
+		FA6F10361C6E5C76002FB5E8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA6F10351C6E5C76002FB5E8 /* Assets.xcassets */; };
+		FA6F10391C6E5C76002FB5E8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA6F10371C6E5C76002FB5E8 /* LaunchScreen.storyboard */; };
+		FA6F103F1C6E5CAB002FB5E8 /* Monolith.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA59B68F1C6C3DE30041420C /* Monolith.framework */; };
+		FA6F10401C6E5CAB002FB5E8 /* Monolith.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FA59B68F1C6C3DE30041420C /* Monolith.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		FA6F10411C6E5CAB002FB5E8 /* Monolith Tweak.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E63FD3F1AF038A500B2E569 /* Monolith Tweak.framework */; };
+		FA6F10421C6E5CAB002FB5E8 /* Monolith Tweak.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8E63FD3F1AF038A500B2E569 /* Monolith Tweak.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		FA6F10431C6E5CAB002FB5E8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8E63FD361AF038A500B2E569 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8E63FD3E1AF038A500B2E569;
+			remoteInfo = Tweak;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		FA6F10451C6E5CAB002FB5E8 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				FA6F10421C6E5CAB002FB5E8 /* Monolith Tweak.framework in Embed Frameworks */,
+				FA6F10401C6E5CAB002FB5E8 /* Monolith.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		8E315F5F1B263A0B00FB761E /* MonolithPluginName.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MonolithPluginName.h; sourceTree = "<group>"; };
@@ -24,6 +59,16 @@
 		8E63FD5F1AF0394C00B2E569 /* TWEView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWEView.m; sourceTree = "<group>"; };
 		FA59B68F1C6C3DE30041420C /* Monolith.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Monolith.framework; sourceTree = "<group>"; };
 		FA59B6921C6C3F2D0041420C /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FA6F10271C6E5C76002FB5E8 /* Target.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Target.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FA6F102A1C6E5C76002FB5E8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		FA6F102C1C6E5C76002FB5E8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		FA6F102D1C6E5C76002FB5E8 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		FA6F102F1C6E5C76002FB5E8 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		FA6F10301C6E5C76002FB5E8 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		FA6F10331C6E5C76002FB5E8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		FA6F10351C6E5C76002FB5E8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		FA6F10381C6E5C76002FB5E8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		FA6F103A1C6E5C76002FB5E8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,6 +77,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA59B6901C6C3DE30041420C /* Monolith.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FA6F10241C6E5C76002FB5E8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FA6F103F1C6E5CAB002FB5E8 /* Monolith.framework in Frameworks */,
+				FA6F10411C6E5CAB002FB5E8 /* Monolith Tweak.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -60,6 +114,7 @@
 			children = (
 				8E63FD411AF038A500B2E569 /* Source */,
 				FA59B6911C6C3F190041420C /* Supporting Files */,
+				FA6F10281C6E5C76002FB5E8 /* Target */,
 				8E315F651B263B2C00FB761E /* Frameworks */,
 				8E63FD401AF038A500B2E569 /* Products */,
 			);
@@ -69,6 +124,7 @@
 			isa = PBXGroup;
 			children = (
 				8E63FD3F1AF038A500B2E569 /* Monolith Tweak.framework */,
+				FA6F10271C6E5C76002FB5E8 /* Target.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -98,6 +154,30 @@
 				FA59B6921C6C3F2D0041420C /* Info.plist */,
 			);
 			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		FA6F10281C6E5C76002FB5E8 /* Target */ = {
+			isa = PBXGroup;
+			children = (
+				FA6F102C1C6E5C76002FB5E8 /* AppDelegate.h */,
+				FA6F102D1C6E5C76002FB5E8 /* AppDelegate.m */,
+				FA6F102F1C6E5C76002FB5E8 /* ViewController.h */,
+				FA6F10301C6E5C76002FB5E8 /* ViewController.m */,
+				FA6F10321C6E5C76002FB5E8 /* Main.storyboard */,
+				FA6F10351C6E5C76002FB5E8 /* Assets.xcassets */,
+				FA6F10371C6E5C76002FB5E8 /* LaunchScreen.storyboard */,
+				FA6F103A1C6E5C76002FB5E8 /* Info.plist */,
+				FA6F10291C6E5C76002FB5E8 /* Supporting Files */,
+			);
+			path = Target;
+			sourceTree = "<group>";
+		};
+		FA6F10291C6E5C76002FB5E8 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				FA6F102A1C6E5C76002FB5E8 /* main.m */,
+			);
+			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -151,6 +231,25 @@
 			productReference = 8E63FD3F1AF038A500B2E569 /* Monolith Tweak.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		FA6F10261C6E5C76002FB5E8 /* Target */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FA6F103B1C6E5C76002FB5E8 /* Build configuration list for PBXNativeTarget "Target" */;
+			buildPhases = (
+				FA6F10231C6E5C76002FB5E8 /* Sources */,
+				FA6F10241C6E5C76002FB5E8 /* Frameworks */,
+				FA6F10251C6E5C76002FB5E8 /* Resources */,
+				FA6F10451C6E5CAB002FB5E8 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FA6F10441C6E5CAB002FB5E8 /* PBXTargetDependency */,
+			);
+			name = Target;
+			productName = Target;
+			productReference = FA6F10271C6E5C76002FB5E8 /* Target.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -163,6 +262,9 @@
 					8E63FD3E1AF038A500B2E569 = {
 						CreatedOnToolsVersion = 6.3.1;
 					};
+					FA6F10261C6E5C76002FB5E8 = {
+						CreatedOnToolsVersion = 7.2.1;
+					};
 					FAD725CF1B1D08230032E880 = {
 						CreatedOnToolsVersion = 6.3;
 					};
@@ -174,6 +276,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = 8E63FD351AF038A500B2E569;
 			productRefGroup = 8E63FD401AF038A500B2E569 /* Products */;
@@ -182,6 +285,7 @@
 			targets = (
 				8E63FD3E1AF038A500B2E569 /* Tweak */,
 				FAD725CF1B1D08230032E880 /* Install Tweak */,
+				FA6F10261C6E5C76002FB5E8 /* Target */,
 			);
 		};
 /* End PBXProject section */
@@ -192,6 +296,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA59B6931C6C3F2D0041420C /* Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FA6F10251C6E5C76002FB5E8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FA6F10391C6E5C76002FB5E8 /* LaunchScreen.storyboard in Resources */,
+				FA6F10361C6E5C76002FB5E8 /* Assets.xcassets in Resources */,
+				FA6F10341C6E5C76002FB5E8 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -223,7 +337,44 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		FA6F10231C6E5C76002FB5E8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FA6F10311C6E5C76002FB5E8 /* ViewController.m in Sources */,
+				FA6F102E1C6E5C76002FB5E8 /* AppDelegate.m in Sources */,
+				FA6F102B1C6E5C76002FB5E8 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		FA6F10441C6E5CAB002FB5E8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8E63FD3E1AF038A500B2E569 /* Tweak */;
+			targetProxy = FA6F10431C6E5CAB002FB5E8 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		FA6F10321C6E5C76002FB5E8 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FA6F10331C6E5C76002FB5E8 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		FA6F10371C6E5C76002FB5E8 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FA6F10381C6E5C76002FB5E8 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		8E63FD531AF038A600B2E569 /* Debug */ = {
@@ -245,7 +396,6 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGNING_REQUIRED = NO;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1.1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -293,7 +443,6 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGNING_REQUIRED = NO;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1.1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_BITCODE = NO;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -362,6 +511,42 @@
 			};
 			name = Release;
 		};
+		FA6F103C1C6E5C76002FB5E8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				INFOPLIST_FILE = Target/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.johncoates.Target;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		FA6F103D1C6E5C76002FB5E8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				INFOPLIST_FILE = Target/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.johncoates.Target;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		FAD725D11B1D08230032E880 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -409,6 +594,15 @@
 			buildConfigurations = (
 				8E63FD561AF038A600B2E569 /* Debug */,
 				8E63FD571AF038A600B2E569 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FA6F103B1C6E5C76002FB5E8 /* Build configuration list for PBXNativeTarget "Target" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FA6F103C1C6E5C76002FB5E8 /* Debug */,
+				FA6F103D1C6E5C76002FB5E8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
