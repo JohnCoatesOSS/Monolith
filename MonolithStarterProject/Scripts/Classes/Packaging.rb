@@ -176,11 +176,11 @@ class Packaging
 
     # transfer deb
     puts "Transferring #{filename} to #{device[:name]} @ #{device[:ip]}"
-    system "scp -P 22 #{filename} root@#{device[:ip]}:#{filename}"
+    system "scp -P 22 -q -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o PasswordAuthentication=no #{filename} root@#{device[:ip]}:#{filename}"
 
     # install deb
     puts "Installing #{filename} on #{device[:name]} @ #{device[:ip]}"
-    system "ssh -p 22 root@#{device[:ip]} \"dpkg -i #{filename}\""
+    system "ssh -p 22 -q -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o PasswordAuthentication=no root@#{device[:ip]} \"dpkg -i #{filename}\""
   end
 
   def terminateApp(appToTerminate)
@@ -189,8 +189,8 @@ class Packaging
       exit 1
     end
     device = @device
-    puts "Killing app #{appToTerminate} on #{device[:name]} @ #{device[:ip]}"
-    system "ssh -p 22 root@#{device[:ip]} \"killall #{appToTerminate}\""
+    puts "Terminating app #{appToTerminate} on #{device[:name]} @ #{device[:ip]}"
+    system "ssh -p 22 -q -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o PasswordAuthentication=no root@#{device[:ip]} \"killall #{appToTerminate}\""
   end
 
   def launchApp(appToLaunch)
@@ -200,7 +200,7 @@ class Packaging
     end
     device = @device
     puts "Launching app with bundle identifier #{appToLaunch} on #{device[:name]} @ #{device[:ip]}"
-    system "ssh -p 22 root@#{device[:ip]} \"area #{appToLaunch}\""
+    system "ssh -p 22 -q -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o PasswordAuthentication=no root@#{device[:ip]} \"area #{appToLaunch}\""
   end
 
   def rebootDevice()
