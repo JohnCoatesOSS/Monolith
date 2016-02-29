@@ -44,7 +44,7 @@ class Assistant
   	if which("dpkg-deb") == nil
   		puts "dpkg not detected, install? y/n"
       response = getUserResponse
-  		if response[0].downcase == "y"
+  		if response[0].downcase != "n"
   			if which("brew") == nil
   				puts "installing prerequisite: homebrew package manager"
   				system "ruby -e \"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)\""
@@ -53,13 +53,9 @@ class Assistant
   			puts "installing dpkg with homebrew"
   			system "brew install dpkg"
 
-  		elsif response[0].downcase == "n"
+  		else
   			puts "install refused: cannot continue with build"
   			exit
-  		else
-  			puts "Expected y or n, received: #{response}"
-  			puts "Cannot continue with build."
-        exit
   		end
   	end
   end
@@ -99,7 +95,8 @@ class Assistant
   	deviceName = device[:name]
   	puts "Your computer's SSH keys need to be installed on your device \"#{deviceName}\" before we can procede."
   	puts "Make sure you have the package \"OpenSSH\" installed on your iOS device. Otherwise open up Cydia now and install it before proceeding."
-  	puts "You may get asked for your device's password. Hint: The default password is: alpine"
+  	puts "You may get asked for your device's password."
+    puts "Hint: The default password is: alpine"
   	# system "ssh -p 22 root@#{device[:ip]} \"area #{appToLaunch}\""
 
 
@@ -111,7 +108,7 @@ class Assistant
   	if status.exitstatus != 0
       handleSSHError(stdout, stderr, status, deviceIP)
   		puts "Couldn't connect to device! Try again? y/n"
-  		if getUserResponse()[0].downcase == 'y'
+  		if getUserResponse()[0].downcase != 'n'
   			return installSSHKeysOnDevice(device)
   		else
   			puts "Couldn't install SSH keys, can't continue install!"
@@ -176,7 +173,7 @@ class Assistant
 
   	response = getUserResponse
 
-  	if response[0].downcase == "y"
+  	if response[0].downcase != "n"
   		puts "Generating SSH keys"
   		system "ssh-keygen -t rsa -f ~/.ssh/id_rsa -N \"\" -q"
   		if File.exists?(sshKeysPath) == false
