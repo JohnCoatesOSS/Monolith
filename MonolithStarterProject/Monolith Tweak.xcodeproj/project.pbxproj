@@ -21,8 +21,6 @@
 		FA6F10391C6E5C76002FB5E8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA6F10371C6E5C76002FB5E8 /* LaunchScreen.storyboard */; };
 		FA6F103F1C6E5CAB002FB5E8 /* Monolith.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA59B68F1C6C3DE30041420C /* Monolith.framework */; };
 		FA6F10401C6E5CAB002FB5E8 /* Monolith.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FA59B68F1C6C3DE30041420C /* Monolith.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		FA6F10411C6E5CAB002FB5E8 /* Monolith Tweak.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E63FD3F1AF038A500B2E569 /* Monolith Tweak.framework */; };
-		FA6F10421C6E5CAB002FB5E8 /* Monolith Tweak.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8E63FD3F1AF038A500B2E569 /* Monolith Tweak.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,7 +40,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				FA6F10421C6E5CAB002FB5E8 /* Monolith Tweak.framework in Embed Frameworks */,
 				FA6F10401C6E5CAB002FB5E8 /* Monolith.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -85,7 +82,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA6F103F1C6E5CAB002FB5E8 /* Monolith.framework in Frameworks */,
-				FA6F10411C6E5CAB002FB5E8 /* Monolith Tweak.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -525,7 +521,7 @@
 				INFOPLIST_FILE = Target/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.johncoates.Target;
+				PRODUCT_BUNDLE_IDENTIFIER = com.monolith.Target;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -542,7 +538,7 @@
 				INFOPLIST_FILE = Target/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.johncoates.Target;
+				PRODUCT_BUNDLE_IDENTIFIER = com.monolith.Target;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

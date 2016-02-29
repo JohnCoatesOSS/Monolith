@@ -18,8 +18,13 @@
 }
 
 + (BOOL)shouldLoadIntoProcess:(MONProcess *)process {
-	return YES; // Load into every process
-	
+    // Only load into our target
+    if ([[process bundleIdentifier] isEqualToString:@"com.monolith.Target"]) {
+        return YES;
+    }
+    else {
+        return NO;
+    }
 }
 
 @end
