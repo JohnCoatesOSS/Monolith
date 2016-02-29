@@ -1,7 +1,7 @@
 Package: com.monolith.template.ObjectiveCTweak
 Name: MonolithExampleTweak
-Depends: com.johncoates.monolith, mobilesubstrate, firmware (>> 8.0)
-Version: 1.0
+Depends: com.johncoates.monolith (>= 0.06), mobilesubstrate, firmware (>> 8.0)
+Version: 1.0-1
 Architecture: iphoneos-arm
 Description: Example Monolith tweak written in Objective-C
 Maintainer: John Coates
