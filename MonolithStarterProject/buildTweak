@@ -1,0 +1,7 @@
+#!/usr/bin/env ruby
+
+STDOUT.sync = true
+projectDirectory = File.expand_path(File.dirname(__FILE__))
+buildScript = File.join(projectDirectory, "Scripts/build.tweak.rb")
+$preventTerminalFromExiting = true
+require buildScript
