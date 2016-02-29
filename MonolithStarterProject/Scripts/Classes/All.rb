@@ -10,6 +10,7 @@ projectDirectory = File.expand_path($scriptsDirectory + "/../")
 require "#{$classesDirectory}/Xcode"
 require "#{$classesDirectory}/Packaging"
 require "#{$classesDirectory}/Configuration"
+require "#{$classesDirectory}/Assistant"
 
 def syscall(*cmd)
 	begin

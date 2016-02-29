@@ -6,6 +6,16 @@ STDOUT.sync = true
 require 'fileutils'
 require 'json'
 
+# build tools
+projectDirectory = File.expand_path(File.dirname(__FILE__) + "/../")
+scriptsDirectory = projectDirectory + "/Scripts"
+classesDirectory = scriptsDirectory + "/Classes"
+allClassesPath = classesDirectory + "/All"
+require allClassesPath
+
+# Assistant
+assistant = Assistant.new()
+
 # read config.json
 configFilename = "config.json"
 configFilepath = File.join(File.dirname(__FILE__), configFilename)
@@ -15,77 +25,12 @@ deviceIP = config['deviceIP']
 deviceName = config['deviceName']
 
 if config['deviceIP'] == '127.0.0.1'
-	puts "config.json hasn't been set up yet, let's do that now."
-	puts "Your device MUST be connected to the same Wi-Fi network as this computer"
-	puts "IPs look like 127.0.0.1, let's find your device's IP."
-	puts "Find your iOS device's IP address here: Settings App -> Wi-Fi -> tap current network -> IP Address field"
-	puts "Enter your device's IP now:"
-
-	# work-around fix for gets = nil error
-	response = gets
-	response ||= ''
-	response.chomp!
-
-	require "resolv"
-	enteredIP = response.to_s
-	doesResolve = enteredIP =~ Resolv::IPv4::Regex ? true : false
-	while !doesResolve
-		puts "You entered an invalid IP: \"#{enteredIP}\". I'm expecting an IP in a similar format as: 127.0.0.1"
-		response = gets
-		response ||= ''
-		response.chomp!
-
-		enteredIP = response.to_s
-		doesResolve = enteredIP =~ Resolv::IPv4::Regex ? true : false
-	end
-
-	deviceIP = enteredIP
-
-    File.open(configFilepath, "w") do |fileHandle|
-			config['deviceIP'] = deviceIP
-      fileHandle.write(JSON.pretty_generate(config))
-    end
-
-	puts "Great, we're using #{deviceIP} for your device's IP"
-	puts "We'll call your device \"#{deviceName}\" for now, but you can change this in config.json"
-	puts "Press enter to continue building your tweak"
-	response = gets
-	response ||= ''
-	response.chomp!
+	config = assistant.configureConfigFromDefault(configFilepath:configFilepath, config:config)
+	deviceIP = config['deviceIP']
+	deviceName = config['deviceName']
 end
 
 
-
-# returns whether they were generated before this method was called true/false
-def ensureSSHKeysAreGenerated()
-	sshKeysPath = File.expand_path("~/.ssh/id_rsa")
-	if File.exists?(sshKeysPath)
-		return true
-	end
-
-	puts "You have no SSH keys generated. These are required for auto-installing your tweak on your device! (Checked #{sshKeysPath})"
-	puts "Would you like to generate SSH keys now? y/n"
-
-	# work-around fix for gets = nil error
-	response = gets
-	response ||= ''
-	response.chomp!
-
-	if response[0].downcase == "y"
-		puts "Generating SSH keys"
-		system "ssh-keygen -t rsa -f ~/.ssh/id_rsa -N \"\" -q"
-		if File.exists?(sshKeysPath) == false
-			puts "SSH keys generation failed. Cannot continue with device install."
-			exit
-		else
-			puts "SSH keys have been generated!"
-			return false
-		end
-	else
-		puts "SSH keys generation refused, cannot continue with device install"
-		exit
-	end
-end
 
 # configure with your device's IP
 # device = {name: '📱 iPhone 5', ip:'192.168.1.153'}
@@ -110,13 +55,6 @@ shouldReboot = FALSE
 # NOTE: LEAVE THIS OFF FOR NOW, THIS FEATURE WILL BE IN A FUTURE RELEASE
 shouldTargetSimulator = FALSE
 shouldLaunchSimulator = FALSE
-
-# build tools
-projectDirectory = File.expand_path(File.dirname(__FILE__  ) + "/../")
-scriptsDirectory = projectDirectory + "/Scripts"
-classesDirectory = scriptsDirectory + "/Classes"
-allClassesPath = classesDirectory + "/All"
-require allClassesPath
 
 # make sure dpkg is installed before doing anything else
 # we need this to be able to build a .deb file
@@ -234,7 +172,7 @@ Dir.chdir(configuration.buildFolder) do
 
 		if configuration.shouldInstallOnDevice
 			# make sure we can actually install on device
-			ensureSSHKeysAreOnDevice(device)
+			assistant.ensureSSHKeysAreOnDevice(device)
 
 			packaging.installOnDevice
 
@@ -295,3 +233,11 @@ Dir.chdir(configuration.buildFolder) do
 
 	 end # build package
 end # build folder
+
+if defined?($preventTerminalFromExiting) != nil
+	if $preventTerminalFromExiting
+		puts "Finished building. Press enter to exit."
+		response = assistant.getUserResponse()
+		puts response
+	end
+end

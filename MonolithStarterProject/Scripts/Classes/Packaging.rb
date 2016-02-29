@@ -141,7 +141,7 @@ class Packaging
     @packageFilename = filename
 
     # remove .DS_Store files
-    puts "Removing .DS_Store files"
+    puts "Removing .DS_Store files from staging directory"
     system "find \"#{@stagingDirectory}/\" -name '*.DS_Store' -type f -delete"
     exitstatus = $?.exitstatus
 

@@ -23,13 +23,13 @@ class XcodeBuild
         useXCPRetty = false
       end
 
-      puts "Building target #{@target}, configuration: #{@configuration}, sdk: #{@sdk} directory: #{@projectDirectory}, build folder:#{@buildFolder}"
+      puts "Building target #{@target}\nconfiguration: #{@configuration}\nsdk: #{@sdk}\ndirectory: #{@projectDirectory}\nbuild folder:#{@buildFolder}"
 
       if File.exists?(@buildFolder) == false
         puts "Creating build folder #{@buildFolder}"
         FileUtils.mkdir_p(buildFolder)
       end
-      
+
       command = [
       "xcodebuild",
       "-target \"#{@target}\"",
