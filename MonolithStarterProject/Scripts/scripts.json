@@ -1,0 +1,19 @@
+{
+  "currentScriptsVersion": "1.1",
+  "scripts": [
+    "buildTweak",
+    "Scripts/build.tweak.rb",
+    "Scripts/Classes/All.rb",
+    "Scripts/Classes/Configuration.rb",
+    "Scripts/Classes/Packaging.rb",
+    "Scripts/Classes/Xcode.rb"
+  ],
+  "crc32": {
+    "buildTweak": 2791709552,
+    "Scripts/build.tweak.rb": 776603526,
+    "Scripts/Classes/All.rb": 2882879747,
+    "Scripts/Classes/Configuration.rb": 788647746,
+    "Scripts/Classes/Packaging.rb": 1014506132,
+    "Scripts/Classes/Xcode.rb": 259805900
+  }
+}
