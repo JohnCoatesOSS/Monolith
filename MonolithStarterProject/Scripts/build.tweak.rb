@@ -23,6 +23,7 @@ config = assistant.readConfig()
 if assistant.runAutoUpdateAsNeeded() == true
 	# load self so we execute with a fresh script
 	load __FILE__
+	exit;
 end
 
 # run config setup if needed
