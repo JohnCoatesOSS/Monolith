@@ -22,8 +22,6 @@ config = assistant.readConfig()
 # get updates
 assistant.runAutoUpdateAsNeeded()
 
-exit;
-
 deviceIP = config['deviceIP']
 deviceName = config['deviceName']
 

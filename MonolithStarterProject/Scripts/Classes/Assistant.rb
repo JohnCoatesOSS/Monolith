@@ -1,6 +1,8 @@
 #!/usr/bin/env ruby
 STDOUT.sync = true
 
+require 'json'
+
 class Assistant
   def initialize()
     @classesDirectory = File.expand_path(File.dirname(__FILE__))
@@ -14,35 +16,35 @@ class Assistant
     # read config.json
     configFilename = "config.json"
     @configFilepath = File.join(@scriptsDirectory, configFilename)
-    config = JSON.parse(File.read(configFilepath))
+    config = JSON.parse(File.read(@configFilepath))
     @config = config
   end
 
   def runAutoUpdateAsNeeded()
-    shouldAutoUpdateScript = config['shouldAutoUpdateScript']
+    shouldAutoUpdateScript = @config['shouldAutoUpdateScript']
     if !shouldAutoUpdateScript
       return
     end
 
-    currentTimestamp = Time.now
-    lastUpdateCheck = config['lastUpdateCheck']
-    checkUpdatesEveryXHours = config['checkUpdatesEveryXHours']
+    currentTimestamp = Time.now.to_i
+    lastUpdateCheck = @config['lastUpdateCheck']
+    checkUpdatesEveryXHours = @config['checkUpdatesEveryXHours']
     checkUpdatesEveryXSeconds = checkUpdatesEveryXHours * 3600
     secondsSinceLastUpdateCheck = currentTimestamp - lastUpdateCheck
 
     if secondsSinceLastUpdateCheck > checkUpdatesEveryXSeconds
-      @config['lastUpdateCheck'] = Time.now
-      saveConfig()
       ensureScriptsAreUpdated()
+      @config['lastUpdateCheck'] = currentTimestamp
+      saveConfig()
     end
   end
   def saveConfig()
     File.open(@configFilepath, "w") do |fileHandle|
-      fileHandle.write(JSON.pretty_generate(@config))
+      prettyOutput = JSON.pretty_generate(@config)
+      fileHandle.write(prettyOutput)
     end
   end
   def ensureScriptsAreUpdated()
-    require 'json'
     scriptsJSON = JSON.parse(File.read(@scriptsJSONpath))
     currentVersion = scriptsJSON['currentScriptsVersion']
 
@@ -53,15 +55,19 @@ class Assistant
     if Gem::Version.new(remoteVersion) > Gem::Version.new(currentVersion)
       puts "Version #{remoteVersion} of Monolith Scripts are available. You have #{currentVersion}"
       puts "Installing new version"
-      downloadNewScripts(scriptsJSON, remoteScriptsJSON)
+      if downloadNewScripts(scriptsJSON, remoteScriptsJSON)
+        buildCRC32sForScripts(scriptsJSON)
+      end
     end
-
-    buildCRC32sForScripts(scriptsJSON)
   end
   def downloadNewScripts(scriptsJSON, remoteScriptsJSON)
     remoteScripts = remoteScriptsJSON['scripts']
     remoteCRC32Hashes = remoteScriptsJSON['crc32']
     localCRC32Hashes = scriptsJSON['crc32']
+
+    # buffer writes so that scripts are left
+    # in a half updated state
+    pendingWrites = {}
 
     remoteScripts.each do |scriptPath|
       localPath = File.join(@projectDirectory, scriptPath)
@@ -69,7 +75,8 @@ class Assistant
 
       if File.exists?(localPath) == false
         remoteContents = contentsOfURL(remotePath)
-        puts "Writing script #{scriptPath}"
+        pendingWrites[localPath] = remoteContents
+        puts "New script: #{scriptPath}"
       else
         # puts "Checking CRC for #{scriptPath}"
         localCRC32 = localCRC32Hashes[scriptPath]
@@ -99,22 +106,31 @@ class Assistant
               puts "Update cancelled, continuing"
               return false
             else
-
+              testUpdatedFile = "#{localPath}.updated"
+              #pendingWrites[testUpdatedFile] = remoteContents
+              pendingWrites[localPath] = remoteContents
             end
-          end
-        end
-        # puts "local vs remote: #{localCRC32}, #{remoteCRC32}"
+          else # if file is unchanged (crc32 matches)
+            remoteContents = contentsOfURL(remotePath)
+            pendingWrites[localPath] = remoteContents
+          end # currentCRC32 != localCRC32
+        end # localRC32 != remoteCRC32
 
-      end
+      end # if File.exists?(localPath) == false
+    end # remoteScripts.each do |scriptPath|
+
+    pendingWrites.each do |filePath, contents|
+      puts "Writing #{filePath} update."
     end
-  end
-
+    puts "Finished updating, continuing"
+  end # downloadNewScripts
 
   def overwriteFile(filePath, contents)
     File.open(filePath, "w") do |fileHandle|
       fileHandle.write contents
     end
   end
+
   def contentsOfURL(url)
     require 'net/http'
     uri = URI(url)
@@ -344,6 +360,3 @@ class Assistant
   	end
   end
 end
-
-assistant = Assistant.new()
-assistant.ensureScriptsAreUpdated()
