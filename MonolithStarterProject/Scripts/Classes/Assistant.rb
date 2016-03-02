@@ -20,10 +20,11 @@ class Assistant
     @config = config
   end
 
+  # returns true if scripts were updated
   def runAutoUpdateAsNeeded()
     shouldAutoUpdateScript = @config['shouldAutoUpdateScript']
     if !shouldAutoUpdateScript
-      return
+      return false
     end
 
     currentTimestamp = Time.now.to_i
@@ -32,11 +33,14 @@ class Assistant
     checkUpdatesEveryXSeconds = checkUpdatesEveryXHours * 3600
     secondsSinceLastUpdateCheck = currentTimestamp - lastUpdateCheck
 
+    returnValue = false
     if secondsSinceLastUpdateCheck > checkUpdatesEveryXSeconds
-      ensureScriptsAreUpdated()
+      returnValue = ensureScriptsAreUpdated()
       @config['lastUpdateCheck'] = currentTimestamp
       saveConfig()
     end
+
+    return returnValue
   end
   def saveConfig()
     File.open(@configFilepath, "w") do |fileHandle|
@@ -44,6 +48,8 @@ class Assistant
       fileHandle.write(prettyOutput)
     end
   end
+
+  # returns true if scripts were updated
   def ensureScriptsAreUpdated()
     scriptsJSON = JSON.parse(File.read(@scriptsJSONpath))
     currentVersion = scriptsJSON['currentScriptsVersion']
@@ -57,9 +63,14 @@ class Assistant
       puts "Installing new version"
       if downloadNewScripts(scriptsJSON, remoteScriptsJSON)
         buildCRC32sForScripts(scriptsJSON)
+        return true
       end
     end
+    # signify no scripts were updated
+    return false
   end
+
+  # returns true if scripts were updated
   def downloadNewScripts(scriptsJSON, remoteScriptsJSON)
     remoteScripts = remoteScriptsJSON['scripts']
     remoteCRC32Hashes = remoteScriptsJSON['crc32']
@@ -123,6 +134,9 @@ class Assistant
       puts "Writing #{filePath} update."
     end
     puts "Finished updating, continuing"
+
+    # return true to signify scripts were updated
+    return true
   end # downloadNewScripts
 
   def overwriteFile(filePath, contents)
@@ -171,7 +185,17 @@ class Assistant
     return scriptsJSON
   end
 
-  def configureConfigFromDefault(config:nil, configFilepath:nil)
+  # returns latest config
+  def ensureConfigIsSetupFromDefault()
+    if @config['deviceIP'] == '127.0.0.1'
+    	configureConfigJSONFromDefault()
+    end
+
+    return @config
+  end
+
+  # returns updated config
+  def configureConfigJSONFromDefault()
     puts "config.json hasn't been set up yet, let's do that now."
   	puts "Your device MUST be connected to the same Wi-Fi network as this computer"
   	puts "Find your iOS device's IP address by following these steps:"
@@ -196,12 +220,12 @@ class Assistant
 
   	deviceIP = enteredIP
 
-    File.open(configFilepath, "w") do |fileHandle|
-			config['deviceIP'] = deviceIP
-      fileHandle.write(JSON.pretty_generate(config))
+    File.open(@configFilepath, "w") do |fileHandle|
+			@config['deviceIP'] = deviceIP
+      fileHandle.write(JSON.pretty_generate(@config))
     end
 
-    deviceName = config['deviceName']
+    deviceName = @config['deviceName']
   	puts "Great, we're using #{deviceIP} for your device's IP"
   	puts "We'll call your device \"#{deviceName}\" for now"
     puts "Feel free to change your device name in Scripts/config.json"
@@ -209,7 +233,7 @@ class Assistant
   	puts "Press enter to continue building your tweak"
   	response = getUserResponse()
 
-    return config
+    return @config
   end
   def ensureDPKGInstalled()
   	if which("dpkg-deb") == nil

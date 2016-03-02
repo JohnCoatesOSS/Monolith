@@ -20,16 +20,16 @@ assistant = Assistant.new()
 config = assistant.readConfig()
 
 # get updates
-assistant.runAutoUpdateAsNeeded()
+if assistant.runAutoUpdateAsNeeded() == true
+	# load self so we execute with a fresh script
+	load __FILE__
+end
+
+# run config setup if needed
+config = assistant.ensureConfigIsSetupFromDefault()
 
 deviceIP = config['deviceIP']
 deviceName = config['deviceName']
-
-if config['deviceIP'] == '127.0.0.1'
-	config = assistant.configureConfigFromDefault(configFilepath:configFilepath, config:config)
-	deviceIP = config['deviceIP']
-	deviceName = config['deviceName']
-end
 
 # configure with your device's IP
 # device = {name: '📱 iPhone 5', ip:'192.168.1.153'}
