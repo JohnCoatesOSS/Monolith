@@ -16,10 +16,13 @@ require allClassesPath
 # Assistant
 assistant = Assistant.new()
 
-# read config.json
-configFilename = "config.json"
-configFilepath = File.join(File.dirname(__FILE__), configFilename)
-config = JSON.parse(File.read(configFilepath))
+# read config
+config = assistant.readConfig()
+
+# get updates
+assistant.runAutoUpdateAsNeeded()
+
+exit;
 
 deviceIP = config['deviceIP']
 deviceName = config['deviceName']
@@ -29,8 +32,6 @@ if config['deviceIP'] == '127.0.0.1'
 	deviceIP = config['deviceIP']
 	deviceName = config['deviceName']
 end
-
-
 
 # configure with your device's IP
 # device = {name: '📱 iPhone 5', ip:'192.168.1.153'}

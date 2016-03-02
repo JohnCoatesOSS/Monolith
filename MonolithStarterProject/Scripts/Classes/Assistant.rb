@@ -1,5 +1,160 @@
+#!/usr/bin/env ruby
+STDOUT.sync = true
 
 class Assistant
+  def initialize()
+    @classesDirectory = File.expand_path(File.dirname(__FILE__))
+    @scriptsDirectory = File.expand_path(@classesDirectory + "/../")
+    @projectDirectory = File.expand_path(@scriptsDirectory + "/../")
+    @scriptsJSONpath = File.join(@scriptsDirectory, "scripts.json")
+    @remoteProjectDirectory = "https://raw.githubusercontent.com/JohnCoates/Monolith/master/MonolithStarterProject"
+  end
+
+  def readConfig()
+    # read config.json
+    configFilename = "config.json"
+    @configFilepath = File.join(@scriptsDirectory, configFilename)
+    config = JSON.parse(File.read(configFilepath))
+    @config = config
+  end
+
+  def runAutoUpdateAsNeeded()
+    shouldAutoUpdateScript = config['shouldAutoUpdateScript']
+    if !shouldAutoUpdateScript
+      return
+    end
+
+    currentTimestamp = Time.now
+    lastUpdateCheck = config['lastUpdateCheck']
+    checkUpdatesEveryXHours = config['checkUpdatesEveryXHours']
+    checkUpdatesEveryXSeconds = checkUpdatesEveryXHours * 3600
+    secondsSinceLastUpdateCheck = currentTimestamp - lastUpdateCheck
+
+    if secondsSinceLastUpdateCheck > checkUpdatesEveryXSeconds
+      @config['lastUpdateCheck'] = Time.now
+      saveConfig()
+      ensureScriptsAreUpdated()
+    end
+  end
+  def saveConfig()
+    File.open(@configFilepath, "w") do |fileHandle|
+      fileHandle.write(JSON.pretty_generate(@config))
+    end
+  end
+  def ensureScriptsAreUpdated()
+    require 'json'
+    scriptsJSON = JSON.parse(File.read(@scriptsJSONpath))
+    currentVersion = scriptsJSON['currentScriptsVersion']
+
+    puts "Checking for an update to Monolith Scripts. Configure this in Scripts/config.json"
+    remoteScriptsJSON = remoteScriptsJSONContents()
+    remoteVersion = remoteScriptsJSON['currentScriptsVersion']
+
+    if Gem::Version.new(remoteVersion) > Gem::Version.new(currentVersion)
+      puts "Version #{remoteVersion} of Monolith Scripts are available. You have #{currentVersion}"
+      puts "Installing new version"
+      downloadNewScripts(scriptsJSON, remoteScriptsJSON)
+    end
+
+    buildCRC32sForScripts(scriptsJSON)
+  end
+  def downloadNewScripts(scriptsJSON, remoteScriptsJSON)
+    remoteScripts = remoteScriptsJSON['scripts']
+    remoteCRC32Hashes = remoteScriptsJSON['crc32']
+    localCRC32Hashes = scriptsJSON['crc32']
+
+    remoteScripts.each do |scriptPath|
+      localPath = File.join(@projectDirectory, scriptPath)
+      remotePath = "#{@remoteProjectDirectory}/#{scriptPath}"
+
+      if File.exists?(localPath) == false
+        remoteContents = contentsOfURL(remotePath)
+        puts "Writing script #{scriptPath}"
+      else
+        # puts "Checking CRC for #{scriptPath}"
+        localCRC32 = localCRC32Hashes[scriptPath]
+        remoteCRC32 = remoteCRC32Hashes[scriptPath]
+
+        if localCRC32 != remoteCRC32
+          # check local script to see if we should overwrite it
+          # of if it's been modified by user
+          currentCRC32 = crc32ForFilePath(localPath)
+          if currentCRC32 != localCRC32
+            puts "Presenting difference between your version of #{scriptPath} and the new version."
+            remoteContents = contentsOfURL(remotePath)
+
+            # write temporary update file to use in diff
+            temporaryUpdateFile = "#{localPath}.update"
+
+            overwriteFile(temporaryUpdateFile, remoteContents)
+            system "diff \"#{localPath}\" \"#{temporaryUpdateFile}\""
+
+            # delete temporary diff file
+            File.delete(temporaryUpdateFile)
+
+            puts "#{scriptPath} has an update available, but you've made changes to it (changes displayed above)"
+            puts "Would you like to overwrite your changes with the update? [y/N]"
+            response = getUserResponse()
+            if response.length == 0 || response[0] != 'y'
+              puts "Update cancelled, continuing"
+              return false
+            else
+
+            end
+          end
+        end
+        # puts "local vs remote: #{localCRC32}, #{remoteCRC32}"
+
+      end
+    end
+  end
+
+
+  def overwriteFile(filePath, contents)
+    File.open(filePath, "w") do |fileHandle|
+      fileHandle.write contents
+    end
+  end
+  def contentsOfURL(url)
+    require 'net/http'
+    uri = URI(url)
+    contents = Net::HTTP.get(uri)
+    return contents
+  end
+
+  def remoteScriptsJSONContents()
+    require 'json'
+    remoteScriptsJsonPath = "#{@remoteProjectDirectory}/Scripts/scripts.json"
+    json = contentsOfURL(remoteScriptsJsonPath)
+    parsed = JSON.parse(json)
+    return parsed
+  end
+
+  def crc32ForFilePath(filePath)
+    require 'zlib'
+    contents = File.read(filePath)
+    return Zlib::crc32(contents)
+  end
+
+  def buildCRC32sForScripts(scriptsJSON)
+    scripts = scriptsJSON['scripts']
+    crc32Hashes = {}
+
+    scripts.each do |scriptPath|
+      filePath = File.join(@projectDirectory, scriptPath)
+      crc32 = crc32ForFilePath(filePath)
+      crc32Hashes[scriptPath] = crc32;
+    end
+
+    scriptsJSON['crc32'] = crc32Hashes;
+
+    File.open(@scriptsJSONpath, "w") do |fileHandle|
+      fileHandle.write(JSON.pretty_generate(scriptsJSON))
+    end
+
+    return scriptsJSON
+  end
+
   def configureConfigFromDefault(config:nil, configFilepath:nil)
     puts "config.json hasn't been set up yet, let's do that now."
   	puts "Your device MUST be connected to the same Wi-Fi network as this computer"
@@ -189,3 +344,6 @@ class Assistant
   	end
   end
 end
+
+assistant = Assistant.new()
+assistant.ensureScriptsAreUpdated()
