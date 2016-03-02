@@ -66,6 +66,7 @@ class Assistant
         return true
       end
     end
+
     # signify no scripts were updated
     return false
   end
@@ -297,7 +298,7 @@ class Assistant
 
   	require 'open3'
   	deviceIP = device[:ip]
-  	command = "ssh -l root -q -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o PasswordAuthentication=yes -o ConnectTimeout=8 #{deviceIP} \"echo '#{sshPublicKeyContents}' > ~/.ssh/authorized_keys2\""
+  	command = "ssh -l root -q -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o PasswordAuthentication=yes -o ConnectTimeout=8 #{deviceIP} \"echo -e '\n#{sshPublicKeyContents}' >> ~/.ssh/authorized_keys2\""
   	stdout, stderr, status = Open3.capture3(command)
 
   	if status.exitstatus != 0
@@ -312,6 +313,28 @@ class Assistant
   		return false
   	else
   		puts "SSH keys successfully transferred to device, continuing with install!"
+
+      puts "This tweak requires Monolith, so if you don't have it you'll need to install before proceeding."
+      puts "Would you like to install Monolith on your device? [Y/n]"
+
+
+      response = getUserResponse()
+
+      if response.length == 0 || response[0].downcase != 'n'
+        remoteCommand = 'uiopen "cydia://url/https://cydia.saurik.com/api/share#?source=http://getdelta.co/&package=com.johncoates.monolith"'
+        puts "Launching Cydia on your device. Please follow the prompts and then install Monolith."
+        command = "ssh -l root -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o PasswordAuthentication=no -o ConnectTimeout=8 #{deviceIP} '#{remoteCommand}'"
+        STDOUT.flush
+      	require 'open3'
+        stdout, stderr, status = Open3.capture3(command)
+
+      	if status.exitstatus != 0
+          handleSSHError(stdout, stderr, status, deviceIP)
+      	end
+        puts "Once you've installed Monolith press enter to continue."
+
+        response = getUserResponse()
+      end
   		return true
   	end
 
