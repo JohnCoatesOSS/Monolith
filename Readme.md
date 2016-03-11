@@ -25,7 +25,7 @@ Documentation is being worked on, please check back soon. Watch this project on 
 
 ## Building Tweaks
 
-Prerequisites: 
+Prerequisites:
 
 * Building Monolith tweaks requires Xcode 6.
 * Architectures supported are ARM-64, ARM, and x86-64
@@ -46,7 +46,7 @@ I recommend building **Templates/ObjectiveC Tweak** first. Here are the steps:
 
 ## License
 
-Monolith's license is found at [Monolith.framework/LICENSE.txt](//github.com/johncoates/Monolith/blob/master/Monolith.framework/LICENSE.txt). Basically you can use Monolith for free as long as your product is free. If you're selling a tweak, then 15% of your sales go to John Coates to fund the development of Monolith.
+Monolith's license is found at [Monolith.framework/LICENSE.txt](//github.com/johncoates/Monolith/blob/master/MonolithStarterProject/Monolith.framework/LICENSE.txt). Basically you can use Monolith for free as long as your product is free. If you're selling a tweak, then 15% of your sales go to fund the development of Monolith.
 
 ## Changelog
 
