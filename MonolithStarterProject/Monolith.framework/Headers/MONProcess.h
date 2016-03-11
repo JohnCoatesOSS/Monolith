@@ -17,6 +17,9 @@
 + (instancetype)currentProcess;
 
 - (BOOL)isSpringBoard;
+/// Whether we're running in OS X
+- (BOOL)isOSX;
+/// Whether we're running in the iOS simulator
 - (BOOL)isSimulator;
 
 /// Whether this process is the Monolith daemon

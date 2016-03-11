@@ -319,7 +319,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Only copy if simulator build\nif [[ \"${NATIVE_ARCH}\" == \"x86_64\" || \"${NATIVE_ARCH}\" == \"i386\" ]]; then\necho \"Copying simulator tweak to Monolith Plugins Install Path: ~/Library/Monolith/Plugins/${PRODUCT_NAME}.dylib\"\ncp \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\" ~/\"Library/Monolith/Plugins/${PRODUCT_NAME}.dylib\"\nfi\n";
+			shellScript = "# Only copy if simulator build\nif [[ \"${NATIVE_ARCH}\" == \"x86_64\" || \"${NATIVE_ARCH}\" == \"i386\" ]]; then\necho \"Copying simulator tweak to Monolith Plugins Install Path: ~/Library/Monolith/Plugins/${PRODUCT_NAME}.dylib\"\nmkdir -p ~/\"Library/Monolith/Plugins/\"\ncp \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\" ~/\"Library/Monolith/Plugins/${PRODUCT_NAME}.dylib\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
