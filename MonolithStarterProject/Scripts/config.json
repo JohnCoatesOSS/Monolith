@@ -1,7 +1,7 @@
 {
-  "deviceIP": "127.0.0.1",
+  "deviceIP": "192.168.1.161",
   "deviceName": "Untitled iOS Device",
-  "shouldAutoUpdateScript" : true,
-  "lastUpdateCheck": 0,
+  "shouldAutoUpdateScript": true,
+  "lastUpdateCheck": 1459377786,
   "checkUpdatesEveryXHours": 24
 }

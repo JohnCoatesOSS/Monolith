@@ -149,24 +149,9 @@ class Assistant
   end
 
   def contentsOfURL(url, redirectLimit = 10)
-    if redirectLimit == 0
-      raise ArgumentError, "HTTP redirection limit reached for url: #{url}"
-    end
     require 'net/http'
-    require 'uri'
-    require 'pp'
-    uri = URI.parse(url)
-    http = Net::HTTP.new(uri.host, uri.port)
-    request = Net::HTTP::Get.new(uri.request_uri)
-    response = http.request(request)
-    pp response
-    # handle redirects
-    case response
-    when Net::HTTPRedirection
-      return contentsOfURL(response['location'], redirectLimit - 1)
-    end
-
-    contents = response.body
+    uri = URI(url)
+    contents = Net::HTTP.get(uri)
     return contents
   end
 
