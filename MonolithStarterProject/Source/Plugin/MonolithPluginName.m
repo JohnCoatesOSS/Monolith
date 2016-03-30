@@ -18,8 +18,12 @@
 }
 
 + (BOOL)shouldLoadIntoProcess:(MONProcess *)process {
-    // Only load into our target
-    if ([[process bundleIdentifier] isEqualToString:@"com.monolith.Target"]) {
+    
+    NSArray *allowedBundleIdentifiers = @[@"com.monolith.Target", @"com.apple.springboard"];
+    NSString *bundleIdentifier = [process bundleIdentifier];
+    
+    // Only load into our inteded targets
+    if ([allowedBundleIdentifiers containsObject:bundleIdentifier]) {
         return YES;
     }
     else {

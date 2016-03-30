@@ -21,6 +21,8 @@
 		FA6F10391C6E5C76002FB5E8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA6F10371C6E5C76002FB5E8 /* LaunchScreen.storyboard */; };
 		FA6F103F1C6E5CAB002FB5E8 /* Monolith.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA59B68F1C6C3DE30041420C /* Monolith.framework */; };
 		FA6F10401C6E5CAB002FB5E8 /* Monolith.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FA59B68F1C6C3DE30041420C /* Monolith.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		FA78925E1CABA80F000B0645 /* SlideToUnlockText.h in Headers */ = {isa = PBXBuildFile; fileRef = FA78925C1CABA80F000B0645 /* SlideToUnlockText.h */; };
+		FA78925F1CABA80F000B0645 /* SlideToUnlockText.m in Sources */ = {isa = PBXBuildFile; fileRef = FA78925D1CABA80F000B0645 /* SlideToUnlockText.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +68,8 @@
 		FA6F10351C6E5C76002FB5E8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FA6F10381C6E5C76002FB5E8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FA6F103A1C6E5C76002FB5E8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FA78925C1CABA80F000B0645 /* SlideToUnlockText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlideToUnlockText.h; sourceTree = "<group>"; };
+		FA78925D1CABA80F000B0645 /* SlideToUnlockText.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlideToUnlockText.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +142,7 @@
 		8E63FD5D1AF0392B00B2E569 /* Hooks */ = {
 			isa = PBXGroup;
 			children = (
+				FA78925B1CABA7DE000B0645 /* SpringBoard */,
 				8E63FD5E1AF0394C00B2E569 /* TWEView.h */,
 				8E63FD5F1AF0394C00B2E569 /* TWEView.m */,
 			);
@@ -176,6 +181,15 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		FA78925B1CABA7DE000B0645 /* SpringBoard */ = {
+			isa = PBXGroup;
+			children = (
+				FA78925C1CABA80F000B0645 /* SlideToUnlockText.h */,
+				FA78925D1CABA80F000B0645 /* SlideToUnlockText.m */,
+			);
+			path = SpringBoard;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -185,6 +199,7 @@
 			files = (
 				8E63FD601AF0394C00B2E569 /* TWEView.h in Headers */,
 				8E315F611B263A0B00FB761E /* MonolithPluginName.h in Headers */,
+				FA78925E1CABA80F000B0645 /* SlideToUnlockText.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -252,7 +267,7 @@
 		8E63FD361AF038A500B2E569 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0630;
+				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = "John Coates";
 				TargetAttributes = {
 					8E63FD3E1AF038A500B2E569 = {
@@ -328,6 +343,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA78925F1CABA80F000B0645 /* SlideToUnlockText.m in Sources */,
 				8E63FD611AF0394C00B2E569 /* TWEView.m in Sources */,
 				8E315F621B263A0B00FB761E /* MonolithPluginName.m in Sources */,
 			);
@@ -519,7 +535,6 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = Target/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.monolith.Target;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -536,7 +551,6 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = Target/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.monolith.Target;
 				PRODUCT_NAME = "$(TARGET_NAME)";

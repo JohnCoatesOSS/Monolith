@@ -7,7 +7,6 @@
 
 #import <Foundation/Foundation.h>
 
-
 /* 
 	This is an example name.
 	You must change this class name before you release your tweak,
