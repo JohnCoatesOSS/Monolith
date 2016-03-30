@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 require 'json'
 STDOUT.sync = true
-debuggingAssistant = true
+debuggingAssistant = false
 
 class Assistant
   def initialize()
@@ -405,48 +405,15 @@ class Assistant
   	end
   end
 
-  # makes sure dpkg is installed, otherwise it downloads it
+  # makes sure dpkg is installed, otherwise it exists
   def ensureDPKGInstalled()
   	if whichBinary("dpkg-deb") == nil
-      puts "dpkg not detected, installing into project folder"
-
-      # download 1.17 version of dpkg because it requires version 6.0 of liblzma, while newer
-      # versions require version 8.0, which doesn't ship with OS X
-      bottleURL = "http://homebrew.bintray.com/bottles/dpkg-1.17.21.yosemite.bottle.tar.gz"
-      debugFile = "/tmp/dpkgtar"
-      targetFile = "bin/dpkg-deb"
-      filename = File.basename(targetFile)
-      destination = File.join(@externalDirectory, filename)
-      downloadBrewBottleBinary(bottleURL: bottleURL, targetFile: targetFile, targetDestination:destination)
-
-
+      puts "dpkg not detected, please re-download the starter project from https://github.com/JohnCoates/Monolith!"
+      puts "You can place the External folder into this current project to fix this issue."
+      exit 1
   	end # if dpkg-deb = nil
   end # ensureDPKGInstalled
-  def downloadBrewBottleBinary(bottleURL: nil, targetFile:nil, targetDestination:nil)
-    # https://bintray.com/artifact/download/homebrew/bottles/gnu-tar-1.28.yosemite.bottle.2.tar.gz
 
-    contents = contentsOfURL(bottleURL)
-    require 'fileutils'
-    require 'rubygems/package'
-    ioHandle = StringIO.new(contents)
-    Zlib::GzipReader.wrap(ioHandle) do |gz|
-      Gem::Package::TarReader.new(gz) do |tar|
-        tar.each do |entry|
-          if entry.full_name.end_with?(targetFile)
-            containingDirectory = File.dirname(targetDestination)
-            if File.exists?(containingDirectory) == false
-              FileUtils.mkdir(containingDirectory)
-            end
-            File.open(targetDestination, "w") do |fileHandle|
-              fileHandle.write entry.read()
-            end
-            # chmod
-            File.chmod(0777, targetDestination)
-          end # entry matches
-        end # tar.each
-      end # TarReader
-    end # GzipReader
-  end
   # taken from http://stackoverflow.com/questions/2108727/which-in-ruby-checking-if-program-exists-in-path-from-ruby
   def whichBinary(cmd)
   	exts = ENV['PATHEXT'] ? ENV['PATHEXT'].split(';') : ['']
