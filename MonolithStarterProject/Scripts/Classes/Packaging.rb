@@ -1,5 +1,5 @@
 class Packaging
-  def initialize(stagingDirectory:nil, installationDevice:nil)
+  def initialize(stagingDirectory:nil, installationDevice:nil, assistant:nil)
       if stagingDirectory == nil
         puts "Error: stagingDirectory not passed to Packaging"
         exit 1
@@ -15,6 +15,7 @@ class Packaging
       createDirectoryIfDoesntExist @stagingDirectory
 
       @device = installationDevice
+      @assistant = assistant
   end
 
   # clears out everything from the staging directory
@@ -151,7 +152,15 @@ class Packaging
     end
 
     # build package
-    system "dpkg-deb", "-b", "-Zgzip", "_", filename
+    dpkgPath = "dpkg-deb"
+    if @assistant != nil
+      potentialDpkgPath = @assistant.whichBinary("dpkg-deb")
+      if potentialDpkgPath
+        dpkgPath = potentialDpkgPath
+      end
+    end
+    puts [dpkgPath, "-b", "-Zgzip", "_", filename].join " "
+    system dpkgPath, "-b", "-Zgzip", "_", filename
 
     if File.exists?(filename) == false
       puts "Error: Couldn't build package #{filename}"

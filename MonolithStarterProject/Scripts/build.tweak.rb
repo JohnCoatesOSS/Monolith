@@ -58,7 +58,7 @@ shouldLaunchSimulator = FALSE
 
 # make sure dpkg is installed before doing anything else
 # we need this to be able to build a .deb file
-ensureDPKGInstalled
+assistant.ensureDPKGInstalled
 
 configuration = Configuration.new(
 	defaultBuildFolder:"#{projectDirectory}/Release",
@@ -127,7 +127,7 @@ open(controlFilepath, 'w') { |fileHandle|
 
 Dir.chdir(configuration.buildFolder) do
 	stagingDirectory = File.expand_path("#{configuration.buildFolder}/_")
-	packaging = Packaging.new(stagingDirectory:stagingDirectory, installationDevice:configuration.device)
+	packaging = Packaging.new(stagingDirectory:stagingDirectory, installationDevice:configuration.device, assistant:assistant)
 
 	# clear staging folder
 	packaging.clearStaging
