@@ -402,10 +402,14 @@ class Assistant
   # taken from http://stackoverflow.com/questions/2108727/which-in-ruby-checking-if-program-exists-in-path-from-ruby
   def whichBinary(cmd)
   	exts = ENV['PATHEXT'] ? ENV['PATHEXT'].split(';') : ['']
-    # add path to homebrew directory
+    # add path to External directory
     # in case our enviroment variables aren't set correctly
-    envPATH = ENV['PATH'] ? ENV['PATH'] + ":/usr/local/bin/:#{@externalDirectory}" : "/usr/local/bin/:#{@externalDirectory}"
-  	envPATH.split(File::PATH_SEPARATOR).each do |path|
+    envPATH = ENV['PATH'] ? ENV['PATH'] : '/usr/bin/'
+    if envPATH.include?(@externalDirectory) == false
+      ENV['PATH'] = "#{@externalDirectory}:#{envPATH}"
+    end
+
+  	ENV['PATH'].split(File::PATH_SEPARATOR).each do |path|
   		exts.each { |ext|
   			exe = File.join(path, "#{cmd}#{ext}")
   			return exe if File.executable?(exe) && !File.directory?(exe)
