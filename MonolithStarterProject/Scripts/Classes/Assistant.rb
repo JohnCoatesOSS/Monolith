@@ -1,13 +1,14 @@
 #!/usr/bin/env ruby
-STDOUT.sync = true
-
 require 'json'
+STDOUT.sync = true
+debuggingAssistant = true
 
 class Assistant
   def initialize()
     @classesDirectory = File.expand_path(File.dirname(__FILE__))
     @scriptsDirectory = File.expand_path(@classesDirectory + "/../")
     @projectDirectory = File.expand_path(@scriptsDirectory + "/../")
+    @externalDirectory = File.join(@projectDirectory, "External")
     @scriptsJSONpath = File.join(@scriptsDirectory, "scripts.json")
     @remoteProjectDirectory = "https://raw.githubusercontent.com/JohnCoates/Monolith/master/MonolithStarterProject"
   end
@@ -42,6 +43,7 @@ class Assistant
 
     return returnValue
   end
+
   def saveConfig()
     File.open(@configFilepath, "w") do |fileHandle|
       prettyOutput = JSON.pretty_generate(@config)
@@ -146,10 +148,25 @@ class Assistant
     end
   end
 
-  def contentsOfURL(url)
+  def contentsOfURL(url, redirectLimit = 10)
+    if redirectLimit == 0
+      raise ArgumentError, "HTTP redirection limit reached for url: #{url}"
+    end
     require 'net/http'
-    uri = URI(url)
-    contents = Net::HTTP.get(uri)
+    require 'uri'
+    require 'pp'
+    uri = URI.parse(url)
+    http = Net::HTTP.new(uri.host, uri.port)
+    request = Net::HTTP::Get.new(uri.request_uri)
+    response = http.request(request)
+    pp response
+    # handle redirects
+    case response
+    when Net::HTTPRedirection
+      return contentsOfURL(response['location'], redirectLimit - 1)
+    end
+
+    contents = response.body
     return contents
   end
 
@@ -235,25 +252,6 @@ class Assistant
   	response = getUserResponse()
 
     return @config
-  end
-  def ensureDPKGInstalled()
-  	if which("dpkg-deb") == nil
-  		puts "dpkg not detected, install? y/n"
-      response = getUserResponse
-  		if response[0].downcase != "n"
-  			if which("brew") == nil
-  				puts "installing prerequisite: homebrew package manager"
-  				system "ruby -e \"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)\""
-  			end
-
-  			puts "installing dpkg with homebrew"
-  			system "brew install dpkg"
-
-  		else
-  			puts "install refused: cannot continue with build"
-  			exit
-  		end
-  	end
   end
 
   def ensureSSHKeysAreOnDevice(device)
@@ -406,4 +404,67 @@ class Assistant
   		exit
   	end
   end
+
+  # makes sure dpkg is installed, otherwise it downloads it
+  def ensureDPKGInstalled()
+  	if whichBinary("dpkg-deb") == nil
+      puts "dpkg not detected, installing into project folder"
+
+      # download 1.17 version of dpkg because it requires version 6.0 of liblzma, while newer
+      # versions require version 8.0, which doesn't ship with OS X
+      bottleURL = "http://homebrew.bintray.com/bottles/dpkg-1.17.21.yosemite.bottle.tar.gz"
+      debugFile = "/tmp/dpkgtar"
+      targetFile = "bin/dpkg-deb"
+      filename = File.basename(targetFile)
+      destination = File.join(@externalDirectory, filename)
+      downloadBrewBottleBinary(bottleURL: bottleURL, targetFile: targetFile, targetDestination:destination)
+
+
+  	end # if dpkg-deb = nil
+  end # ensureDPKGInstalled
+  def downloadBrewBottleBinary(bottleURL: nil, targetFile:nil, targetDestination:nil)
+    # https://bintray.com/artifact/download/homebrew/bottles/gnu-tar-1.28.yosemite.bottle.2.tar.gz
+
+    contents = contentsOfURL(bottleURL)
+    require 'fileutils'
+    require 'rubygems/package'
+    ioHandle = StringIO.new(contents)
+    Zlib::GzipReader.wrap(ioHandle) do |gz|
+      Gem::Package::TarReader.new(gz) do |tar|
+        tar.each do |entry|
+          if entry.full_name.end_with?(targetFile)
+            containingDirectory = File.dirname(targetDestination)
+            if File.exists?(containingDirectory) == false
+              FileUtils.mkdir(containingDirectory)
+            end
+            File.open(targetDestination, "w") do |fileHandle|
+              fileHandle.write entry.read()
+            end
+            # chmod
+            File.chmod(0777, targetDestination)
+          end # entry matches
+        end # tar.each
+      end # TarReader
+    end # GzipReader
+  end
+  # taken from http://stackoverflow.com/questions/2108727/which-in-ruby-checking-if-program-exists-in-path-from-ruby
+  def whichBinary(cmd)
+  	exts = ENV['PATHEXT'] ? ENV['PATHEXT'].split(';') : ['']
+    # add path to homebrew directory
+    # in case our enviroment variables aren't set correctly
+    envPATH = ENV['PATH'] ? ENV['PATH'] + ":/usr/local/bin/:#{@externalDirectory}" : "/usr/local/bin/:#{@externalDirectory}"
+  	envPATH.split(File::PATH_SEPARATOR).each do |path|
+  		exts.each { |ext|
+  			exe = File.join(path, "#{cmd}#{ext}")
+  			return exe if File.executable?(exe) && !File.directory?(exe)
+  		}
+  	end
+  	return nil
+  end
+end
+
+if debuggingAssistant == true
+  # Debugging
+  assistant = Assistant.new()
+  assistant.ensureDPKGInstalled
 end
