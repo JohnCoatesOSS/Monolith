@@ -45,7 +45,7 @@ shouldBuildPackage = TRUE
 # in case we want to turn off package building quickly, uncomment the following line
 #shouldBuildPackage = FALSE
 
-appToRestart = "SpringBoard"
+appToTerminate = "SpringBoard"
 
 shouldReboot = FALSE
 # in case we want to turn on rebooting quickly, uncomment the following line
@@ -67,7 +67,7 @@ configuration = Configuration.new(
 	defaultProjectDirectory:projectDirectory,
 	defaultShouldInstallOnDevice: shouldInstallOnDevice,
 	defaultShouldBuildPackage: shouldBuildPackage,
-	defaultAppToTerminate: appToRestart,
+	defaultAppToTerminate: appToTerminate,
 	defaultDevice: device
 )
 
@@ -191,8 +191,13 @@ Dir.chdir(configuration.buildFolder) do
 		end # device install
 
 		# show package in finder
-		packagePath = File.expand_path(filename)
-  	system "open -R \"#{packagePath}\""
+		if defined?($showBuiltFileInFinder) != nil
+			if $showBuiltFileInFinder
+				packagePath = File.expand_path(filename)
+				system "open -R \"#{packagePath}\""
+			end
+		end
+
 
 		if shouldLaunchSimulator
 			require 'pathname'
