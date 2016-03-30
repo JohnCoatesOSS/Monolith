@@ -13,6 +13,10 @@
 @property (readonly) NSString *bundleIdentifier;
 @property (readonly) NSString *executablePath;
 @property (readonly, nonatomic) BOOL isBlacklisted;
+@property (readonly) NSNumber *processID;
+
+/// Whether process is being debugged
+@property (readonly, nonatomic) BOOL isBeingDebugged;
 
 + (instancetype)currentProcess;
 
@@ -23,7 +27,7 @@
 - (BOOL)isSimulator;
 
 /// Whether this process is the Monolith daemon
-/// This is where all daemon components should get loaded.
+/// This is where all daemon components get loaded.
 - (BOOL)isMonolithDaemon;
 
 @end

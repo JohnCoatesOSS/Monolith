@@ -7,10 +7,7 @@
 //
 
 #import <TargetConditionals.h>
-
-#if TARGET_OS_IOS
-    #import <UIKit/UIKit.h>
-#endif
+#import <Foundation/Foundation.h>
 
 //! Project version number for Monolith.
 FOUNDATION_EXPORT double MonolithVersionNumber;
