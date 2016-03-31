@@ -306,6 +306,7 @@ class Assistant
       if response.length == 0 || response[0].downcase != 'n'
         remoteCommand = 'uiopen "cydia://url/https://cydia.saurik.com/api/share#?source=http://getdelta.co/&package=com.johncoates.monolith"'
         puts "Launching Cydia on your device. Please follow the prompts and then install Monolith."
+        puts "If launching fails, open Cydia and add the repo: http://getdelta.co/ then install Monolith from there."
         command = "ssh -l root -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o PasswordAuthentication=no -o ConnectTimeout=8 #{deviceIP} '#{remoteCommand}'"
         STDOUT.flush
       	require 'open3'
