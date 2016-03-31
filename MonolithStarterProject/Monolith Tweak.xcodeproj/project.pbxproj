@@ -12,7 +12,6 @@
 		8E63FD601AF0394C00B2E569 /* TWEView.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E63FD5E1AF0394C00B2E569 /* TWEView.h */; };
 		8E63FD611AF0394C00B2E569 /* TWEView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E63FD5F1AF0394C00B2E569 /* TWEView.m */; };
 		FA59B6901C6C3DE30041420C /* Monolith.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA59B68F1C6C3DE30041420C /* Monolith.framework */; };
-		FA59B6931C6C3F2D0041420C /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FA59B6921C6C3F2D0041420C /* Info.plist */; };
 		FA6F102B1C6E5C76002FB5E8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FA6F102A1C6E5C76002FB5E8 /* main.m */; };
 		FA6F102E1C6E5C76002FB5E8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FA6F102D1C6E5C76002FB5E8 /* AppDelegate.m */; };
 		FA6F10311C6E5C76002FB5E8 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA6F10301C6E5C76002FB5E8 /* ViewController.m */; };
@@ -306,7 +305,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FA59B6931C6C3F2D0041420C /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
