@@ -294,8 +294,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				8E63FD3E1AF038A500B2E569 /* Tweak */,
 				FAD725CF1B1D08230032E880 /* Install Tweak */,
+				8E63FD3E1AF038A500B2E569 /* Tweak */,
 				FA6F10261C6E5C76002FB5E8 /* Target */,
 			);
 		};
