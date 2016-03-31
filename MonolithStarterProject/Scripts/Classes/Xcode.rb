@@ -92,7 +92,7 @@ class XcodeBuild
     Dir.chdir @projectDirectory do
       command = [
       "xcodebuild",
-      "-target=\"@target\"",
+      "-target \"#{@target}\"",
       "-configuration", @configuration,
       "-sdk", @sdk,
       "build",
@@ -171,7 +171,7 @@ module Xcode
 
 		command = [
 		"xcodebuild",
-		"-target=\"#{target}\"",
+		"-target \"#{target}\"",
 		"-configuration", configuration,
 		"-sdk", sdk,
 		"build",
@@ -206,7 +206,7 @@ module Xcode
 
 	def self.getVariables(target:nil, configuration:"Release", sdk:"iphoneos", buildFolder:"Release")
 		xcodeRawBuildSettings = syscall "xcodebuild",
-		"-target=\"#{target}\"",
+		"-target \"#{target}\"",
 		"-configuration", configuration,
 		"-sdk", sdk,
 		"build",
