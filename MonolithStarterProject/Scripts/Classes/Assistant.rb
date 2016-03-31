@@ -286,7 +286,8 @@ class Assistant
   	if status.exitstatus != 0
       handleSSHError(stdout, stderr, status, deviceIP)
   		puts "Couldn't connect to device! Try again? [y]/n"
-  		if response.length == 0 || getUserResponse()[0].downcase != 'n'
+      response = getUserResponse()
+  		if response.length == 0 || response[0].downcase != 'n'
   			return installSSHKeysOnDevice(device)
   		else
   			puts "Couldn't install SSH keys, can't continue install!"
