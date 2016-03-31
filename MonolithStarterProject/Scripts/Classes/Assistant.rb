@@ -280,7 +280,7 @@ class Assistant
 
   	require 'open3'
   	deviceIP = device[:ip]
-  	command = "ssh -l root -q -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o PasswordAuthentication=yes -o ConnectTimeout=8 #{deviceIP} \"echo -e '\n#{sshPublicKeyContents}' >> ~/.ssh/authorized_keys2\""
+  	command = "ssh -l root -q -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o PasswordAuthentication=yes -o ConnectTimeout=8 #{deviceIP} \"mkdir -p ~/.ssh/ >/dev/null 2>&1; touch ~/.ssh/authorized_keys2; echo -e '\n#{sshPublicKeyContents}' >> ~/.ssh/authorized_keys2\""
   	stdout, stderr, status = Open3.capture3(command)
 
   	if status.exitstatus != 0
