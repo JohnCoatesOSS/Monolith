@@ -116,7 +116,7 @@ class Assistant
             puts "#{scriptPath} has an update available, but you've made changes to it (changes displayed above)"
             puts "Would you like to overwrite your changes with the update? [y/N]"
             response = getUserResponse()
-            if response.length == 0 || response[0] != 'y'
+            if response.length == 0 || response[0].downcase != 'y'
               puts "Update cancelled, continuing"
               return false
             else
@@ -251,8 +251,7 @@ class Assistant
   end
   def getUserResponse()
     STDOUT.flush
-  	response = gets
-  	response ||= ''
+  	response = gets || ''
   	response.chomp!
   	return response
   end
@@ -286,8 +285,8 @@ class Assistant
 
   	if status.exitstatus != 0
       handleSSHError(stdout, stderr, status, deviceIP)
-  		puts "Couldn't connect to device! Try again? y/n"
-  		if getUserResponse()[0].downcase != 'n'
+  		puts "Couldn't connect to device! Try again? [y]/n"
+  		if response.length == 0 || getUserResponse()[0].downcase != 'n'
   			return installSSHKeysOnDevice(device)
   		else
   			puts "Couldn't install SSH keys, can't continue install!"
@@ -298,7 +297,7 @@ class Assistant
   		puts "SSH keys successfully transferred to device, continuing with install!"
 
       puts "This tweak requires Monolith, so if you don't have it you'll need to install before proceeding."
-      puts "Would you like to install Monolith on your device? [Y/n]"
+      puts "Would you like to install Monolith on your device? [y]/n"
 
 
       response = getUserResponse()
@@ -370,11 +369,11 @@ class Assistant
   	end
 
   	puts "You have no SSH keys generated. These are required for auto-installing your tweak on your device! (Checked #{sshKeysPath})"
-  	puts "Would you like to generate SSH keys now? y/n"
+  	puts "Would you like to generate SSH keys now? [y]/n"
 
   	response = getUserResponse
 
-  	if response[0].downcase != "n"
+  	if response.length == 0 || response[0].downcase != "n"
   		puts "Generating SSH keys"
   		system "ssh-keygen -t rsa -f ~/.ssh/id_rsa -N \"\" -q"
   		if File.exists?(sshKeysPath) == false
