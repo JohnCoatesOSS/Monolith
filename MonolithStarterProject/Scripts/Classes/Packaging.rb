@@ -151,6 +151,11 @@ class Packaging
       exit exitstatus
     end
 
+    # set correct permissions for debian control directory
+    controlDirectory = File.join(@stagingDirectory, "DEBIAN")
+    system "chmod", "-R", "u+wrX,go+rX", controlDirectory
+
+
     # build package
     dpkgPath = "dpkg-deb"
     if @assistant != nil
