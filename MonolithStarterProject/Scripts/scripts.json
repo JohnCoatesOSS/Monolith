@@ -1,5 +1,5 @@
 {
-  "currentScriptsVersion": "1.1.6",
+  "currentScriptsVersion": "1.1.7",
   "scripts": [
     "buildTweak",
     "Scripts/build.tweak.rb",
@@ -15,7 +15,7 @@
     "Scripts/Classes/All.rb": 2232534462,
     "Scripts/Classes/Assistant.rb": 1103262765,
     "Scripts/Classes/Configuration.rb": 788647746,
-    "Scripts/Classes/Packaging.rb": 3877976828,
+    "Scripts/Classes/Packaging.rb": 1510187199,
     "Scripts/Classes/Xcode.rb": 203908811
   }
 }
